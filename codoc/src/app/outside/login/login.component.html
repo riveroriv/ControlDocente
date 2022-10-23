@@ -1,0 +1,30 @@
+<app-navexterior></app-navexterior>
+<mat-card class="login-card">
+    <mat-card-title>Inicio de sesión</mat-card-title>
+    <mat-card-subtitle>Control Docente</mat-card-subtitle>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Código</mat-label>
+            <input matInput [formControl]="codigoControl">
+            <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
+               Ingrese un código válido
+              </mat-error>
+              <mat-error *ngIf="codigoControl.hasError('required')">
+                Su código es <strong>necesaria</strong>
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordControl">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="passwordControl.hasError('required')">
+                Su contraseña es <strong>necesaria</strong>
+              </mat-error>
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-flat-button color="primary">Ingresar</button>
+          </mat-card-actions>
+    </mat-card-content>
+</mat-card>

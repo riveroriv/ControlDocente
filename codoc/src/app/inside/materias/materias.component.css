@@ -1,0 +1,18 @@
+.primer-elemento{
+    display: flex;
+    flex-direction: row;
+}
+table {
+}
+
+.mat-row{
+    transition: background-color 0.4s ease;
+}
+.mat-row:hover{
+    background-color: rgb(210, 210, 210);
+}
+
+.buscar{
+    flex-grow: 1;
+    margin: 0 20px;
+}

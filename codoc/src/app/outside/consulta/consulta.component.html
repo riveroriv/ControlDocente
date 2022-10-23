@@ -1,0 +1,78 @@
+<app-navexterior></app-navexterior>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef> Código </th>
+      <td mat-cell *matCellDef="let materia"> {{materia.codigo}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let materia"> {{materia.nombre}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="silabo">
+      <th mat-header-cell *matHeaderCellDef> Sílabo </th>
+        <td mat-cell *matCellDef="let materia">
+            <mat-icon *ngIf="materia.silabo >= 1">check</mat-icon>
+        </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="parcial_1">
+      <th mat-header-cell *matHeaderCellDef> P1 </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.parcial_1 >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="parcial_2">
+      <th mat-header-cell *matHeaderCellDef> P2 </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.parcial_2 >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="parcial_3">
+      <th mat-header-cell *matHeaderCellDef> P3 </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.parcial_3 >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nota_1">
+      <th mat-header-cell *matHeaderCellDef> N1 </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.nota_1 >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nota_2">
+      <th mat-header-cell *matHeaderCellDef> N2 </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.nota_2 >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nota_3">
+      <th mat-header-cell *matHeaderCellDef> N3 </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.nota_3 >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="planilla">
+      <th mat-header-cell *matHeaderCellDef> Planilla </th>
+      <td mat-cell *matCellDef="let materia">
+          <mat-icon *ngIf="materia.planilla >= 1">check</mat-icon>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="ciudad">
+      <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+      <td mat-cell *matCellDef="let materia"> {{materia.ciudad}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

@@ -1,0 +1,49 @@
+<mat-toolbar class="segunda-fila">
+    <span>Docentes</span>
+</mat-toolbar>
+
+<div class="opciones">
+    <mat-form-field  appearance="fill">
+        <mat-label>Buscar por</mat-label>
+        <mat-select  [(value)]="buscarPor">
+          <mat-option value="nombre">Nombre</mat-option>
+          <mat-option value="codigo">Código</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+        <mat-form-field appearance="fill" class="buscar">
+          <mat-label>Buscar</mat-label>
+          <input type="text"
+                 placeholder="{{buscarPor}}"
+                 aria-label="Number"
+                 matInput
+                 [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option>
+              hola
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <button  mat-mini-fab color="primary" 
+        matTooltip="Añadir docente">
+          <mat-icon>add</mat-icon>
+        </button>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="docentes">
+    <mat-selection-list #shoes [multiple]="false">
+        <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+            <div class="opcion">
+            <p>55800</p>
+            <p>{{shoe}}</p>
+            <button mat-icon-button>
+                <!--(click)="openDialog()"-->
+                <mat-icon>edit</mat-icon>
+            </button>
+            </div>
+        </mat-list-option>
+      </mat-selection-list>
+</div>

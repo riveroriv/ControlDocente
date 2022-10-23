@@ -1,0 +1,29 @@
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 10vh;
+}
+.spacer{
+  flex-grow: 1;
+}
+.vista{
+  height: 100vh;
+  overflow: hidden;
+}
+.contenedor{
+  overflow-y: scroll;
+  height: 90vh;
+}
+.menu-mobile{
+  display: none;
+}
+@media (max-width: 600px) {
+  .menu-mobile{
+    display: flex;
+    justify-content: space-around;
+  }
+  .menu-desk{
+    display: none;
+  }
+}

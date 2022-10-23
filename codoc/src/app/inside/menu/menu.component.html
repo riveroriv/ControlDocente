@@ -1,0 +1,61 @@
+<div class="vista">
+    <mat-toolbar color="primary" class="mat-elevation-z5">
+        <span>codoc</span>
+
+        <span class="spacer"></span>
+
+        <div class="menu-desk">
+          <a mat-list-item [routerLink]="['materias']" (click)="setSeccion('Materias')"><button mat-flat-button color="primary"
+            matTooltip="Materias">
+            <mat-icon>school</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['docentes']" (click)="setSeccion('Docentes')"><button mat-flat-button color="primary"
+            matTooltip="Docentes">
+            <mat-icon>people</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['reportes']" (click)="setSeccion('Reportes')"><button mat-flat-button color="primary"
+            matTooltip="Reportes">
+            <mat-icon>bar_chart</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['usuarios']" (click)="setSeccion('Ajustes')"><button mat-flat-button color="primary"
+            matTooltip="Usuarios">
+            <mat-icon>manage_accounts</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['ajustes']" (click)="setSeccion('Ajustes')"><button mat-flat-button color="primary"
+            matTooltip="Ajustes">
+            <mat-icon>settings</mat-icon></button></a>
+            <a mat-list-item [routerLink]="['home']"     (click)="setSeccion('Home')"><button mat-flat-button color="primary"
+              matTooltip="Información">
+              <mat-icon>info</mat-icon></button></a>
+        </div>
+        
+        <span class="spacer"></span>
+
+        <button mat-icon-button [matMenuTriggerFor]="menuUsuario" aria-label="Menu usuario">
+          <button mat-mini-fab color="basic">R</button>
+        </button>
+        <mat-menu #menuUsuario="matMenu">
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Perfil</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Cerrar sesión</span>
+          </button>
+        </mat-menu>
+    </mat-toolbar>
+      <div class="contenedor">
+        <mat-toolbar class="menu-mobile">
+          <a mat-list-item [routerLink]="['materias']" (click)="setSeccion('Materias')"><button mat-icon-button color="primary">
+            <mat-icon>school</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['docentes']" (click)="setSeccion('Docentes')"><button mat-icon-button color="primary">
+            <mat-icon>people</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['reportes']" (click)="setSeccion('Reportes')"><button mat-icon-button color="primary">
+            <mat-icon>bar_chart</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['usuarios']" (click)="setSeccion('Ajustes')"><button mat-icon-button color="primary">
+            <mat-icon>manage_accounts</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['ajustes']" (click)="setSeccion('Ajustes')"><button mat-icon-button color="primary">
+          <mat-icon>settings</mat-icon></button></a>
+          <a mat-list-item [routerLink]="['home']"     (click)="setSeccion('Home')"><button mat-icon-button color="primary">
+            <mat-icon>info</mat-icon></button></a>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+      </div>
+</div>

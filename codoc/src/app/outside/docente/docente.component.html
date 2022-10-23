@@ -1,0 +1,20 @@
+<app-navexterior></app-navexterior>
+<mat-card>
+    <mat-card-title>Consultar materias</mat-card-title>
+    <mat-card-subtitle>Control Docente</mat-card-subtitle>
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Código</mat-label>
+            <input matInput [formControl]="codigoControl">
+            <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
+               Ingrese un código válido
+              </mat-error>
+              <mat-error *ngIf="codigoControl.hasError('required')">
+                Su código es <strong>necesaria</strong>
+              </mat-error>
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-flat-button color="primary">Consultar</button>
+          </mat-card-actions>
+    </mat-card-content>
+</mat-card>

@@ -23,8 +23,8 @@ class Materia extends Model
         'nota_2',
         'nota_3',
         'planilla',
-        'docente',
-        'ciudad',
-        'usuario',
+        'id_docente',
+        'id_ciudad',
+        'id_usuario',
     ];
 }

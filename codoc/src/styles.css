@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.segunda-fila{
+    height: 13vh;
+    font-weight: 100;
+    font-size: x-large;
+  }
+.spacer{
+  flex-grow: 1;
+}
+.opciones{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin: 20px;
+}

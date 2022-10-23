@@ -120,7 +120,12 @@ class MateriaController extends Controller
      * @return Response
      */
     public function listarMateriasDocente ($docente){
-        return Materia::where('id_docente', $docente)->get();
+        return Materia::where('id_docente', $docente)
+        ->join('ciudades','materias.id_ciudad','=','ciudades.id')
+        ->select('materias.codigo','materias.nombre','materias.parcial_1','materias.parcial_2','materias.parcial_3'
+                ,'materias.nota_1','materias.nota_2','materias.nota_3','materias.silabo'
+                ,'materias.planilla','ciudades.nombre as ciudad')
+        ->get();
     }
     
     /**
@@ -129,8 +134,6 @@ class MateriaController extends Controller
      * @return Response
      */
     public function listarMateria ($codigo){
-        $materia = Materia::where('codigo', $codigo);
-        
-        return $materia->get();
+        return Materia::where('codigo', $codigo)->firstOrFail()->get();
     }
 }
