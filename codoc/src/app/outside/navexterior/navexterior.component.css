@@ -6,3 +6,12 @@
 .espaciador{
   flex-grow: 1;
 }
+.nav{
+  height: 10vh;
+}
+.logo{
+  height: 7vh;
+}
+button:hover{
+  background-color: #512f8b;
+}

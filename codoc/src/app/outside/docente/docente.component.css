@@ -1,9 +1,19 @@
 .mat-card{
     width: max-content;
-    margin: 100px auto;
 }
 .mat-form-field, .mat-card-actions{
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.contenedor{
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #673AB7;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../assets/CODOC-O.svg');
+    background-size: 75%;
+    background-position: center;
 }

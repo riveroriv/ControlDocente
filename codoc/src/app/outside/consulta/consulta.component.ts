@@ -5,6 +5,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export interface Materia {
   codigo:number;
@@ -31,15 +32,19 @@ export class ConsultaComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'nombre', 'silabo', 'parcial_1', 'parcial_2', 'parcial_1', 'nota_1', 'nota_2', 'nota_3', 'planilla', 'ciudad'];
   dataToDisplay = [...ELEMENT_DATA];
   dataSource = new MateriaDataSource(this.dataToDisplay);
-
   materiasDocente:any = [];
+  numeroMaterias = 0;
+  mensaje = '';
+  codigo = 0;
 
-  constructor(private materias:MateriasService) {
+  constructor(private materias:MateriasService, private route: ActivatedRoute, public router: Router) {
+    this.codigo = Number(route.snapshot.params['codigo']);
   }
   ngOnInit(): void {
-    this.materias.getMateriasDocente(42000).subscribe(data=>{
+    this.materias.getMateriasDocente(this.codigo).subscribe(data => {
       this.materiasDocente = data;
       for (const materia of this.materiasDocente) {
+        this.numeroMaterias ++;
        const m:Materia = { 
           codigo: materia.codigo,
           nombre: materia.nombre,
@@ -56,9 +61,21 @@ export class ConsultaComponent implements OnInit {
       this.dataToDisplay = [...this.dataToDisplay, m];
       this.dataSource.setData(this.dataToDisplay);
       }
-    });
+      if(this.numeroMaterias == 0){
+        this.numeroMaterias = -1;
+        this.displayedColumns = [];
+        this.mensaje = 'No tienes materias asociadas';
+      }
+    },
+    error => {
+      this.router.navigateByUrl('consulta_falla');
+    }
+    );
   }
 
+  volver(){
+    this.router.navigateByUrl('docente');
+  }
 }
 
 class MateriaDataSource extends DataSource<Materia> {

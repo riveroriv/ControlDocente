@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Docente;
 use App\Materia;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
@@ -82,6 +83,63 @@ class MateriaController extends Controller
                 'message' => 'Cambio guardado'
             ], 200
         );
+    }    
+
+    /**
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function actualizarCampoMateria (Request $request){
+        $datosValidados = $request->validate([
+            'codigo' => 'required|integer|exists:materias,codigo',
+            'campo' => 'required|integer',
+            'valor' => 'required|integer',
+        ]);
+        $valor = $datosValidados['valor'] > 0;
+        $materia = Materia::where('codigo', $datosValidados['codigo']);
+
+        $user = $request->user();
+        if(!$user->tokenCan('admin')){
+            if($user->id != $materia->id_usuario){
+                return response()->json([
+                    'message' => 'No tienes permiso para realizar esta acción'
+                ], 403);
+            }
+        }
+
+        $campo = '';
+        switch($datosValidados['campo']){
+            case 0: $campo = 'silabo';
+                break;
+            case 1: $campo = 'parcial_1';
+                break;
+            case 2: $campo = 'parcial_2';
+                break;
+            case 3: $campo = 'parcial_3';
+                break;
+            case 4: $campo = 'nota_1';
+                break;
+            case 5: $campo = 'nota_2';
+                break;
+            case 6: $campo = 'nota_3';
+                break;
+            case 7: $campo = 'planilla';
+                break;
+            default: return response()->json(
+                [
+                    'message' => 'No existe ese campo'
+                ], 400
+            );
+                break;
+            }
+
+            $materia->update([$campo => $valor]);
+        return response()->json(
+            [
+                'message' => 'Cambio guardado'
+            ], 200
+        );
     }
     
     /**
@@ -119,8 +177,12 @@ class MateriaController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function listarMateriasDocente ($docente){
-        return Materia::where('id_docente', $docente)
+    public function listarMateriasDocente (Request $request){
+        $codigo = $request->validate([
+            'codigo' => 'required|integer|exists:docentes,codigo',
+        ]);
+
+        return Materia::where('id_docente', $codigo)
         ->join('ciudades','materias.id_ciudad','=','ciudades.id')
         ->select('materias.codigo','materias.nombre','materias.parcial_1','materias.parcial_2','materias.parcial_3'
                 ,'materias.nota_1','materias.nota_2','materias.nota_3','materias.silabo'
@@ -133,7 +195,10 @@ class MateriaController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function listarMateria ($codigo){
-        return Materia::where('codigo', $codigo)->firstOrFail()->get();
+    public function listarMateria (Request $request){
+        $codigo = $request->validate([
+            'codigo' => 'required|integer|exists:materias,codigo',
+        ]);
+        return Materia::where('codigo', $codigo)->get();
     }
 }

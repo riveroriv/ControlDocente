@@ -1,30 +1,30 @@
 <app-navexterior></app-navexterior>
-<mat-card class="login-card">
+<div class="contenedor">
+<mat-card class="login-card mat-elevation-z8">
     <mat-card-title>Inicio de sesión</mat-card-title>
     <mat-card-subtitle>Control Docente</mat-card-subtitle>
     <mat-card-content>
         <mat-form-field appearance="fill">
             <mat-label>Código</mat-label>
-            <input matInput [formControl]="codigoControl">
+            <input matInput [formControl]="codigoControl" #codigo>
             <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
                Ingrese un código válido
               </mat-error>
-              <mat-error *ngIf="codigoControl.hasError('required')">
-                Su código es <strong>necesaria</strong>
-              </mat-error>
+            <mat-error *ngIf="codigoControl.hasError('required')">
+              Su código es <strong>necesaria</strong>
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Contraseña</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordControl">
+            <mat-label>Nueva contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordControl" #password>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="passwordControl.hasError('required')">
-                Su contraseña es <strong>necesaria</strong>
-              </mat-error>
           </mat-form-field>
           <mat-card-actions>
-            <button mat-flat-button color="primary">Ingresar</button>
+            <button mat-flat-button color="primary" (click)="login(codigo.value, password.value)">Ingresar</button>
           </mat-card-actions>
     </mat-card-content>
 </mat-card>
+
+</div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { DocenteService } from 'src/app/servicios/docente.service';
 
 @Component({
   selector: 'app-docente',
@@ -10,20 +13,32 @@ export class DocenteComponent implements OnInit {
  
   hide = true;
   codigoControl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{4,}')]);
-  passwordControl = new FormControl('', [Validators.required]);
+  duracionSnackBar: number = 3;
 
-  constructor() { }
+  constructor(private docenteServicio: DocenteService, public router: Router, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
-  email = new FormControl('', [Validators.required, Validators.email]);
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
+  consultar(codigo:string){
+    if ( this.codigoControl.status == 'INVALID' ){
+      this.snackBar('Código no válido');
+    } else {
+        this.docenteServicio.docenteExiste(Number(codigo)).subscribe(
+          data => {
+            this.router.navigateByUrl('consulta/'+codigo);
+          },
+          error => {
+            this.snackBar('Docente no encotrado');
+          }
+        );
+      }
+  }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+  snackBar(message: string){
+    this._snackBar.open(message, 'Cerrar', {
+      duration: this.duracionSnackBar * 1000,
+    });
   }
 
 }

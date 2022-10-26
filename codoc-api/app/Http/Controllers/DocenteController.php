@@ -81,4 +81,20 @@ class DocenteController extends Controller
             ], 200
         );
     }
+
+    /**
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function existeDocente (Request $request){
+        $datosValidados = $request->validate([
+            'codigo' => 'required|integer|exists:docentes,codigo',
+        ]);
+        return response()->json(
+            [
+                'message' => 'Docente existe'
+            ], 200
+        );
+    }
 }

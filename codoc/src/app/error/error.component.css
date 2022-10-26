@@ -1,0 +1,57 @@
+.contenedor{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.alien{
+    height: 50vh;
+    max-width: 100vw;
+    flex-grow: 1;
+    margin: 50px 0;
+}
+.info{
+    margin: 20px;
+    min-width: 40vw;
+    flex-grow: 1;
+    text-align: center;
+}
+#nave{
+   animation: alien-nave 3s ease alternate infinite;
+}
+#segundo{
+    animation: alien-volador 4s ease-in-out alternate-reverse infinite;
+}
+#lineas-1{
+    animation: alien-lineas 2s ease-in-out alternate-reverse infinite;
+}
+#lineas-2{
+    animation: alien-lineas 3s ease-in-out alternate infinite;
+}
+
+@keyframes alien-nave {
+    from{
+        transform: translate(0, 0);
+    }
+    to{
+        transform: translate(30px, 10px);
+    }
+}
+@keyframes alien-volador {
+    from{
+        transform: translate(0, 0);
+    }
+    to{
+        transform: translatey(100px);
+    }
+}
+@keyframes alien-lineas {
+    from{
+        transform: translate(0, 0);
+    }
+    to{
+        transform: translatey(50px);
+    }
+}

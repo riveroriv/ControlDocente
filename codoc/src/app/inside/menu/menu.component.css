@@ -18,6 +18,9 @@
 .menu-mobile{
   display: none;
 }
+.logo{
+  height: 7vh;
+}
 @media (max-width: 600px) {
   .menu-mobile{
     display: flex;

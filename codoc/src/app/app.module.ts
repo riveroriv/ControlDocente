@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,6 +11,9 @@ import { LoginComponent } from './outside/login/login.component';
 import { DocenteComponent } from './outside/docente/docente.component';
 import { ErrorComponent } from './error/error.component';
 import { ConsultaComponent } from './outside/consulta/consulta.component';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './servicios/token-interceptor.service';
 
 import { NavexteriorComponent } from './outside/navexterior/navexterior.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -38,10 +42,13 @@ import { MateriaDialogComponent } from './inside/dialogs/materia-dialog/materia-
 import { SettingsComponent } from './inside/settings/settings.component';
 import { UsuariosComponent } from './inside/usuarios/usuarios.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PasswordDialogComponent } from './inside/dialogs/password-dialog/password-dialog.component';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
     children: [
+      {path: '', component: MateriasComponent, pathMatch: 'full'},
       {path:'home', component: HomeComponent},
       {path:'materias', component: MateriasComponent},
       {path:'docentes', component: DocentesComponent},
@@ -51,11 +58,15 @@ const rutas:Routes = [
     ]},
   {path:'login', component:LoginComponent},
   {path:'docente', component:DocenteComponent},
-  {path:'consulta/:id', component:ConsultaComponent},
+  {path:'consulta/:codigo', component:ConsultaComponent},
   
   
   {path:'**', component:ErrorComponent}
 ];
+
+export class Globales {
+  readonly codocAPI:string = 'http://127.0.0.1:8000/api/';
+}
 
 @NgModule({
   declarations: [
@@ -73,6 +84,7 @@ const rutas:Routes = [
     MateriaDialogComponent,
     SettingsComponent,
     UsuariosComponent,
+    PasswordDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,9 +111,18 @@ const rutas:Routes = [
     MatSelectModule,
     MatDividerModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    Globales,
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
