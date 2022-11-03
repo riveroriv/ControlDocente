@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordDialogComponent } from '../dialogs/password-dialog/password-dialog.component';
+import { PerfilDialogComponent } from '../dialogs/perfil-dialog/perfil-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -66,5 +67,12 @@ export class MenuComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
+
+  openPerfil(){
+    const dialogRef = this.dialog.open(PerfilDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

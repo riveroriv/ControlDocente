@@ -21,6 +21,9 @@
 .logo{
   height: 7vh;
 }
+.codoc{
+  display: inline;
+}
 @media (max-width: 600px) {
   .menu-mobile{
     display: flex;

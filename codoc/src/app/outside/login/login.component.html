@@ -3,28 +3,28 @@
 <mat-card class="login-card mat-elevation-z8">
     <mat-card-title>Inicio de sesión</mat-card-title>
     <mat-card-subtitle>Control Docente</mat-card-subtitle>
-    <mat-card-content>
+    <form (ngSubmit)="login(codigo.value, password.value)"> 
+      <mat-card-content>
         <mat-form-field appearance="fill">
             <mat-label>Código</mat-label>
-            <input matInput [formControl]="codigoControl" #codigo>
+            <input matInput [formControl]="codigoControl" #codigo tabindex="1">
             <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
                Ingrese un código válido
               </mat-error>
             <mat-error *ngIf="codigoControl.hasError('required')">
-              Su código es <strong>necesaria</strong>
+              Su código es <strong>necesario</strong>
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Nueva contraseña</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordControl" #password>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordControl" #password tabindex="2">
+              <mat-icon mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </mat-form-field>
           <mat-card-actions>
-            <button mat-flat-button color="primary" (click)="login(codigo.value, password.value)">Ingresar</button>
+            <button mat-flat-button type="submit" color="primary" tabindex="3">Ingresar</button>
           </mat-card-actions>
     </mat-card-content>
+  </form>
 </mat-card>
 
 </div>

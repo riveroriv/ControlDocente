@@ -15,3 +15,6 @@
 button:hover{
   background-color: #512f8b;
 }
+.titulo-nav{
+  display: inline;
+}

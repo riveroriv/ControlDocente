@@ -32,7 +32,7 @@ export class UsuarioService {
   }
 
   eliminar(codigo: number){
-    return this.http.delete(this.globales.codocAPI +"usuario/"+codigo);
+    return this.http.delete(this.globales.codocAPI +"usuario", {params: {codigo: codigo}});
   }
 
   cambiarPassword(password: string){
@@ -43,4 +43,7 @@ export class UsuarioService {
     return this.http.put(this.globales.codocAPI +"cambiarPasswordAdmin", {password: password, usuario: usuario});
   }
 
+  usuario() {
+    return this.http.get(this.globales.codocAPI + 'usuario');
+  }
 }

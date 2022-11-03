@@ -3,121 +3,123 @@
 </mat-toolbar>
 
 <div class="opciones">
-    <mat-form-field  appearance="fill">
-        <mat-label>Buscar por</mat-label>
-        <mat-select [(value)]="buscarPor">
-          <mat-option value="nombre" aria-selected="true">Nombre</mat-option>
-          <mat-option value="codigo">Código</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-        <mat-form-field appearance="fill"  class="buscar">
-        <mat-label>Buscar</mat-label>
-        <input type="text"
-                placeholder="{{buscarPor}}"
-                matInput
-                [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let materia of dataToDisplay">
-                {{materia.codigo}} - {{materia.nombre}}
-            </mat-option>
-        </mat-autocomplete>
-        </mat-form-field>
+  
+  <mat-form-field class="buscar">
+    <mat-label>Buscar</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input type="text"
+            placeholder="Nombre o código"
+            matInput
+            (keyup)="filtro($event)">
+  </mat-form-field>
         
-        <button  mat-mini-fab color="primary" matTooltip="Añadir materia">
-          <mat-icon>add</mat-icon>
-        </button>
+  <button  mat-button color="primary" aria-label="Añadir materia">
+    <mat-icon>add</mat-icon>Nueva materia
+  </button>
 </div>
 
-<mat-divider></mat-divider>
-
-<div class="materias">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
-
+<div class="materias mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="codigo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="codigo"> Código </th>
-          <td mat-cell *matCellDef="let materia"> {{materia.codigo}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="código"> {{materia.codigo}} </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="nombre"> Nombre </th>
-          <td mat-cell *matCellDef="let materia"> {{materia.nombre}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Materia</mat-header-cell>
+          <mat-cell *matCellDef="let materia" data-label="nombre" class="nombre"> {{materia.nombre}} </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="silabo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="silabo"> Sílabo </th>
-            <td mat-cell *matCellDef="let materia">
-                <mat-icon *ngIf="materia.silabo >= 1">check</mat-icon>
-            </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">Sílabo</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let materia" data-label="sílabo">
+                <button mat-icon-button color="basic" class="boton_materia">
+                  <mat-icon *ngIf="materia.silabo >= 1">check</mat-icon>
+                </button>
+            </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="parcial_1">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="p1"> P1 </th>
-          <td mat-cell *matCellDef="let materia">
-              <mat-icon *ngIf="materia.parcial_1 >= 1">check</mat-icon>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">P1</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia"  data-label="primer parcial">
+              <button mat-icon-button color="basic" class="boton_materia">
+                <mat-icon *ngIf="materia.parcial_1 >= 1">check</mat-icon>
+              </button>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="parcial_2">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="p2"> P2 </th>
-          <td mat-cell *matCellDef="let materia">
-              <mat-icon *ngIf="materia.parcial_2 >= 1">check</mat-icon>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">P2</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="segundo parcial">
+              <button mat-icon-button color="basic" class="boton_materia">
+                <mat-icon *ngIf="materia.parcial_2 >= 1">check</mat-icon>
+              </button>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="parcial_3">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="p3"> P3 </th>
-          <td mat-cell *matCellDef="let materia">
-              <mat-icon *ngIf="materia.parcial_3 >= 1">check</mat-icon>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">P3</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="parcial final">
+              <button mat-icon-button color="basic" class="boton_materia">
+                <mat-icon *ngIf="materia.parcial_3 >= 1">check</mat-icon>
+              </button>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="nota_1">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="n1"> N1 </th>
-          <td mat-cell *matCellDef="let materia">
-              <mat-icon *ngIf="materia.nota_1 >= 1">check</mat-icon>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">N1</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="nota 1p">
+              <button mat-icon-button color="basic" class="boton_materia">
+                <mat-icon *ngIf="materia.nota_1 >= 1">check</mat-icon>
+              </button>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="nota_2">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="n2"> N2 </th>
-          <td mat-cell *matCellDef="let materia">
-              <mat-icon *ngIf="materia.nota_2 >= 1">check</mat-icon>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">N2</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="nota 2p">
+              <button mat-icon-button color="basic" class="boton_materia">
+                <mat-icon *ngIf="materia.nota_2 >= 1">check</mat-icon>
+              </button>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="nota_3">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="n3"> N3 </th>
-          <td mat-cell *matCellDef="let materia">
-              <mat-icon *ngIf="materia.nota_3 >= 1">check</mat-icon>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">N3</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia"  data-label="nota pf">
+              <button mat-icon-button color="basic" class="boton_materia">
+                <mat-icon *ngIf="materia.nota_3 >= 1">check</mat-icon>
+              </button>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="planilla">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="planilla"> Planilla </th>
-          <td mat-cell *matCellDef="let materia">
-            <button mat-icon-button color="primary">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="ocultar">Planilla</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia"  data-label="planilla">
+            <button mat-icon-button color="basic" class="boton_materia">
                 <mat-icon *ngIf="materia.planilla >= 1">check</mat-icon>
             </button>
-          </td>
+          </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="editar">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="editar"> Editar </th>
-            <td mat-cell *matCellDef="let materia">
+            <mat-header-cell *matHeaderCellDef class="ocultar"></mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let materia"  data-label="editar">
                 <button mat-icon-button>
                     <mat-icon   (click)="openDialog()">edit</mat-icon>
                 </button>
-            </td>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="ciudad">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="ciudad"> Ciudad </th>
-          <td mat-cell *matCellDef="let materia"> {{materia.ciudad}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header="ciudad"> Ciudad </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="ciudad"> {{materia.ciudad}} </mat-cell>
         </ng-container>
       
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      
+  <mat-paginator [pageSizeOptions]="[1, 10, 25, 100]" showFirstLastButtons aria-label="Seleccione el número de materias"></mat-paginator>
 </div>
 

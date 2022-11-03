@@ -9,10 +9,74 @@ table {
     transition: background-color 0.4s ease;
 }
 .mat-row:hover{
-    background-color: rgb(210, 210, 210);
+    /*background-color: rgb(240, 240, 240);*/
 }
+.materias{
+    width: 90%;
+    margin: auto;
+}
+.materias table{
+    width: 100%;
+}
+.boton_materia{
+    transition: all 0.2s ease-out;
+    margin: auto;
+}
+.boton_materia:hover{
+    background-color: #673ab7;
+    color: #fff;
+}
+.ocultar{
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+@media screen and (max-width: 700px) {
+    .boton_materia{
+        margin: 0;
+        background-color: #673ab7;
+        color: #fff;
+    }
+    .ocultar{
+        display: none;
+    }
+    .mat-header-cell{
+        justify-content: center;
+    }
+    .mat-table {
+        border: 0;
+        vertical-align: middle
+      }
+    
+    .mat-table caption {
+    font-size: 1em;
+    }
 
-.buscar{
-    flex-grow: 1;
-    margin: 0 20px;
+    .mat-table .mat-row{
+    border-bottom: 5px solid #ddd;
+    padding: 0 24px;
+    display: block;
+    }
+
+    .mat-table .mat-cell {
+        border-bottom: 1px solid #ddd;
+        display: flexbox;
+        align-items: center;
+        justify-content: space-between;
+        height:20px;
+        padding-left: 0;
+      }
+    .nombre{
+        text-align: right;
+    }
+    .mat-table .mat-cell:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: .85em;
+    }
+    .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+    }
 }

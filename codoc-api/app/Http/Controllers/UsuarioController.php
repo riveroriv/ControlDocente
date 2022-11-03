@@ -27,7 +27,17 @@ class UsuarioController extends Controller
      * @return Response
      */
     public function actualizarUsuario (Request $request){
+        $datosValidados = $request->validate([
+            'nombre' => 'required|string|min:5',
+            'correo'  => 'required|string|email|max:255',
+        ]);
+        $usuario = $request->user();
+        
+        $usuario->nombre = $datosValidados['nombre'];
+        $usuario->correo = $datosValidados['correo'];
 
+        $usuario->save();
+        return response()->json(['message' => 'Actualizado'], 200);
     }
     /**
      * 

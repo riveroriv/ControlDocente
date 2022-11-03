@@ -32,14 +32,16 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post(this.globales.codocAPI + 'logout', null);
+    return this.http.post(this.globales.codocAPI + 'logout', {});
   }
-
+  logoutAll() {
+    return this.http.post(this.globales.codocAPI + 'logout/all', {});
+  }
   usuario() {
     return this.http.get(this.globales.codocAPI + 'usuario');
   }
   isAdmin() {
-    return this.http.post(this.globales.codocAPI + 'isAdmin', null);
+    return this.http.post(this.globales.codocAPI + 'isAdmin', {});
   }
 
   hasToken(): boolean{

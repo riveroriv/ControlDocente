@@ -12,10 +12,19 @@ import { DocenteComponent } from './outside/docente/docente.component';
 import { ErrorComponent } from './error/error.component';
 import { ConsultaComponent } from './outside/consulta/consulta.component';
 
+import { NavexteriorComponent } from './outside/navexterior/navexterior.component';
+import { MateriasComponent } from './inside/materias/materias.component';
+import { DocentesComponent } from './inside/docentes/docentes.component';
+import { ReportesComponent } from './inside/reportes/reportes.component';
+import { MateriaDialogComponent } from './inside/dialogs/materia-dialog/materia-dialog.component';
+import { SettingsComponent } from './inside/settings/settings.component';
+import { UsuariosComponent } from './inside/usuarios/usuarios.component';
+import { PasswordDialogComponent } from './inside/dialogs/password-dialog/password-dialog.component';
+import { PerfilDialogComponent } from './inside/dialogs/perfil-dialog/perfil-dialog.component';
+
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './servicios/token-interceptor.service';
 
-import { NavexteriorComponent } from './outside/navexterior/navexterior.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,26 +39,20 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MenuComponent } from './inside/menu/menu.component';
-import { MateriasComponent } from './inside/materias/materias.component';
-import { DocentesComponent } from './inside/docentes/docentes.component';
-import { ReportesComponent } from './inside/reportes/reportes.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MateriaDialogComponent } from './inside/dialogs/materia-dialog/materia-dialog.component';
-import { SettingsComponent } from './inside/settings/settings.component';
-import { UsuariosComponent } from './inside/usuarios/usuarios.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { PasswordDialogComponent } from './inside/dialogs/password-dialog/password-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
     children: [
       {path: '', component: MateriasComponent, pathMatch: 'full'},
-      {path:'home', component: HomeComponent},
+      {path:'informacion', component: HomeComponent},
       {path:'materias', component: MateriasComponent},
       {path:'docentes', component: DocentesComponent},
       {path:'reportes', component: ReportesComponent},
@@ -85,6 +88,7 @@ export class Globales {
     SettingsComponent,
     UsuariosComponent,
     PasswordDialogComponent,
+    PerfilDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,7 +116,8 @@ export class Globales {
     MatDividerModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [
     Globales,

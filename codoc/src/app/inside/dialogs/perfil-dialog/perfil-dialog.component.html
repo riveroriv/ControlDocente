@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Información de Perfil</h2>
+<h3>Código : {{codigo}}</h3>
+
+<mat-dialog-content class="mat-typography contenido">
+    
+<span>Creado : {{created_at | date:'dd-MM-yyyy'}}</span>
+<span>Actualizado: {{updated_at | date:'dd-MM-yyyy'}}</span>
+<br>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput value="{{nombre}}" #nombrei>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput value="{{correo}}" #correoi>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="warn" mat-dialog-close>Cerrar todas las sesiones</button>
+</mat-dialog-actions>
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Cancelar</button>
+    <button mat-flat-button color="primary" cdkFocusInitia (click)="actualizar(nombrei.value, correoi.value)" >Guardar</button>
+  </mat-dialog-actions>

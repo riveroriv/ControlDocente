@@ -1,7 +1,7 @@
 <div class="vista">
-    <mat-toolbar color="primary" class="mat-elevation-z5">
+    <mat-toolbar color="primary" class="mat-elevation-z3">
       <img src="../../../assets/CODOC-ICONO.png" class = 'logo'>  
-      <span>codoc</span>
+      <h2 class="codoc">Codoc</h2>
 
         <span class="spacer"></span>
 
@@ -21,7 +21,7 @@
           <a mat-list-item [routerLink]="['ajustes']" (click)="setSeccion('Ajustes')" *ngIf="isAdmin"><button mat-flat-button color="primary"
             matTooltip="Ajustes">
             <mat-icon>settings</mat-icon></button></a>
-            <a mat-list-item [routerLink]="['home']"     (click)="setSeccion('Home')"><button mat-flat-button color="primary"
+            <a mat-list-item [routerLink]="['informacion']"     (click)="setSeccion('Home')"><button mat-flat-button color="primary"
               matTooltip="Información">
               <mat-icon>info</mat-icon></button></a>
         </div>
@@ -32,7 +32,7 @@
           <button mat-mini-fab color="basic">{{ usuario }}</button>
         </button>
           <mat-menu #menuUsuario="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="openPerfil()">
               <mat-icon>person</mat-icon>
               <span>Perfil</span>
             </button>
@@ -58,7 +58,7 @@
             <mat-icon>manage_accounts</mat-icon></button></a>
           <a mat-list-item [routerLink]="['ajustes']" (click)="setSeccion('Ajustes')" *ngIf="isAdmin"><button mat-icon-button color="primary">
           <mat-icon>settings</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['home']"     (click)="setSeccion('Home')"><button mat-icon-button color="primary">
+          <a mat-list-item [routerLink]="['informacion']"     (click)="setSeccion('Home')"><button mat-icon-button color="primary">
             <mat-icon>info</mat-icon></button></a>
         </mat-toolbar>
         <router-outlet></router-outlet>

@@ -3,6 +3,7 @@
   <mat-card class="mat-elevation-z8">
     <mat-card-title>Consultar materias</mat-card-title>
     <mat-card-subtitle>Control Docente</mat-card-subtitle>
+    <form (ngSubmit)="consultar(codigo.value)"> 
     <mat-card-content>
         <mat-form-field appearance="fill">
             <mat-label>Código</mat-label>
@@ -15,8 +16,9 @@
               </mat-error>
           </mat-form-field>
           <mat-card-actions>
-            <button mat-flat-button color="primary" (click)="consultar(codigo.value)" tabindex="2">Consultar</button>
+            <button type="submit" mat-flat-button color="primary" tabindex="2">Consultar</button>
           </mat-card-actions>
     </mat-card-content>
+    </form>
 </mat-card>
 </div>

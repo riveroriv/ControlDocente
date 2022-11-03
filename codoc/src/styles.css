@@ -14,6 +14,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .opciones{
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  align-items: baseline;
   margin: 20px;
+}
+
+.buscar{
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.buscar .mat-icon{
+  margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .buscar{
+      margin: 0;
+  }
+  .opciones{
+      flex-direction: column;
+      justify-content: center;
+  }
 }
