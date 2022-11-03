@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MateriasService } from '../../servicios/materias.service';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import { MateriaDialogComponent } from '../dialogs/materia-dialog/materia-dialog.component';
@@ -19,6 +19,7 @@ export interface Materia {
   nota_3:number;
   planilla:number;
   ciudad:string;
+  docente:string;
 }
 
 @Component({
@@ -27,9 +28,9 @@ export interface Materia {
   styleUrls: ['./materias.component.css']
 })
 
-export class MateriasComponent implements AfterViewInit {
+export class MateriasComponent implements OnInit {
 
-  displayedColumns: string[] = ['codigo', 'nombre', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla', 'ciudad', 'editar'];
+  displayedColumns: string[] = ['codigo', 'nombre', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla', 'docente', 'ciudad', 'editar'];
   dataSource!: MatTableDataSource<Materia>;
   materiasDocente:any = [];
 
@@ -38,7 +39,10 @@ export class MateriasComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   
   constructor(private materias:MateriasService, public dialog: MatDialog) {
-    this.materias.getMateriasDocente(42000).subscribe(data=>{
+  }
+
+  ngOnInit(): void {
+    this.materias.getMateriasUsuario().subscribe(data=>{
       this.materiasDocente = data;
       let arrayMaterias =  Array();
       for (const materia of this.materiasDocente) {
@@ -54,23 +58,28 @@ export class MateriasComponent implements AfterViewInit {
           nota_3: materia.nota_3,
           planilla: materia.planilla,
           ciudad: materia.ciudad,
+          docente: materia.docente,
         };
         arrayMaterias.push(m);
       }
-      this.dataSource = new MatTableDataSource(arrayMaterias);
+      this.dataSource = new MatTableDataSource<Materia>(arrayMaterias);
       
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
 
-  ngAfterViewInit() {
-  }
-
   openDialog() {
     const dialogRef = this.dialog.open(MateriaDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  nuevaMateria(){
+    const nuevaMateria = this.dialog.open(MateriaDialogComponent);
+
+    nuevaMateria.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }

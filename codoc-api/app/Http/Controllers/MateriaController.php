@@ -42,7 +42,11 @@ class MateriaController extends Controller
      * @return Response
      */
     public function listarMateriasUsuario (Request $request){
-        return  Materia::where('id_usuario', $request->user()->id)->get();    
+        return  Materia::where('id_usuario', $request->user()->id)
+        ->join('docentes', 'docentes.codigo', '=', 'materias.id_docente')
+        ->join('ciudades', 'ciudades.id', '=', 'materias.id_ciudad')
+        ->select('materias.*','docentes.nombre as docente', 'ciudades.nombre as ciudad')
+        ->get();    
     }
     
     /**

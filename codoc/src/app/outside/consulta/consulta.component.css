@@ -6,19 +6,26 @@
   align-items: center;
   margin: 10vh 0;
 }
-svg{
+.no-display{
+    display: none !important;
+    background-color: red;
+}
+.svg{
   width: 40vw;
   height: auto;
 }
-
+.grafico{
+ width: 40%;
+ margin: auto;
+ margin-top: 30px;
+}
 .contenedor_vista{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .volver{
-    margin: auto;
-    margin-top: 30px;
+    margin: 30px auto;
 }
 .mat-row{
     transition: background-color 0.4s ease;
@@ -30,9 +37,6 @@ svg{
     width: 90%;
     margin: auto;
 }
-.materias table{
-    width: 100%;
-}
 .boton_materia{
     transition: all 0.2s ease-out;
     margin: auto;
@@ -41,8 +45,22 @@ svg{
     justify-content: center;
     text-align: center;
     margin: auto;
+
 }
+@media screen and (max-width: 900px) {
+    .grafico{
+        width: 70%;
+    }
+}
+
 @media screen and (max-width: 700px) {
+    .svg{
+        width: 90vw;
+
+    }
+    .grafico{
+        width: 90%;
+    }
     .boton_materia{
         margin: 0;
     }

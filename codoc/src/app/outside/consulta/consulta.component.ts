@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MateriasService } from '../../servicios/materias.service';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable, ReplaySubject} from 'rxjs';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 export interface Materia {
   codigo:number;
@@ -27,22 +26,27 @@ export interface Materia {
   templateUrl: './consulta.component.html',
   styleUrls: ['./consulta.component.css']
 })
+
 export class ConsultaComponent implements OnInit {
+
   displayedColumns: string[] = ['codigo', 'nombre', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla', 'ciudad'];
   dataSource!: MatTableDataSource<Materia>;
   materiasDocente:any = [];
   numeroMaterias = 0;
-
+  cumplidos = [0,0,0,0,0,0,0,0];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
   mensaje = '';
   codigo = 0;
+  display = '';
 
   constructor(private materias:MateriasService, private route: ActivatedRoute, public router: Router) {
     this.codigo = Number(route.snapshot.params['codigo']);
   }
+
   ngOnInit(): void {
     this.materias.getMateriasDocente(this.codigo).subscribe({
       next: (data) => {
@@ -64,15 +68,25 @@ export class ConsultaComponent implements OnInit {
             ciudad: materia.ciudad,
           };
           arrayMaterias.push(m);
+          this.sumCumplido(m);
         }
+        this.barChartData.datasets[0].data = this.cumplidos;
+        this.chart?.update();
         if(this.numeroMaterias == 0) {
           this.numeroMaterias = -1;
           this.mensaje = 'No tienes materias asociadas';
+          this.display = 'no-display';
         }
-        this.dataSource = new MatTableDataSource(arrayMaterias);
+        this.dataSource = new MatTableDataSource<Materia>(arrayMaterias);
         
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+
+        this.paginator._intl.firstPageLabel = 'Primera';
+        this.paginator._intl.itemsPerPageLabel = 'Número de materias';
+        this.paginator._intl.lastPageLabel = 'última';
+        this.paginator._intl.nextPageLabel = 'Siguiente';
+        this.paginator._intl.previousPageLabel = 'Anterior';
       },
       error: (e) => {
         this.router.navigateByUrl('fallo_consulta');
@@ -90,5 +104,46 @@ export class ConsultaComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    scales: {
+      x: {},
+      y: {
+        min: 0,
+        ticks: {
+          stepSize: 1
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+    }
+  };
+  public barChartType: ChartType = 'bar';
+
+  public barChartData: ChartData<'bar'> = {
+    labels: [ 'SB', 'P1', 'P2', 'P3', 'N1', 'N2', 'N3', 'PL' ],
+    datasets: [
+      { 
+        data: this.cumplidos,
+        label: 'Completado' ,
+        backgroundColor: [ '#673ab7' ]
+      },
+    ]
+  };
+
+  public sumCumplido(materia: Materia){
+    this.cumplidos[0] += materia.silabo;
+    this.cumplidos[1] += materia.nota_1;
+    this.cumplidos[2] += materia.nota_2;
+    this.cumplidos[3] += materia.nota_3;
+    this.cumplidos[4] += materia.parcial_1;
+    this.cumplidos[5] += materia.parcial_2;
+    this.cumplidos[6] += materia.parcial_3;
+    this.cumplidos[7] += materia.planilla;
   }
 }

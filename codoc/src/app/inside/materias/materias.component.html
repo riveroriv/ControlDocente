@@ -13,7 +13,7 @@
             (keyup)="filtro($event)">
   </mat-form-field>
         
-  <button  mat-button color="primary" aria-label="Añadir materia">
+  <button  mat-button color="primary" aria-label="Añadir materia" (click)="nuevaMateria()">
     <mat-icon>add</mat-icon>Nueva materia
   </button>
 </div>
@@ -101,6 +101,16 @@
             </button>
           </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="docente">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="docente"> Docente </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="docente"> {{materia.docente}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ciudad">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="ciudad"> Ciudad </mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let materia" data-label="ciudad"> {{materia.ciudad}} </mat-cell>
+        </ng-container>
       
         <ng-container matColumnDef="editar">
             <mat-header-cell *matHeaderCellDef class="ocultar"></mat-header-cell>
@@ -110,16 +120,11 @@
                 </button>
             </mat-cell>
         </ng-container>
-
-        <ng-container matColumnDef="ciudad">
-          <mat-header-cell *matHeaderCellDef mat-sort-header="ciudad"> Ciudad </mat-header-cell>
-          <mat-cell mat-cell *matCellDef="let materia" data-label="ciudad"> {{materia.ciudad}} </mat-cell>
-        </ng-container>
       
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
       
-  <mat-paginator [pageSizeOptions]="[1, 10, 25, 100]" showFirstLastButtons aria-label="Seleccione el número de materias"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons aria-label="Seleccione el número de materias"></mat-paginator>
 </div>
 

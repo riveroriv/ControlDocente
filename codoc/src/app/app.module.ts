@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,6 +48,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NewMatetriaDialogComponent } from './inside/dialogs/new-matetria-dialog/new-matetria-dialog.component';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
@@ -89,12 +91,14 @@ export class Globales {
     UsuariosComponent,
     PasswordDialogComponent,
     PerfilDialogComponent,
+    NewMatetriaDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(rutas),
+    NgChartsModule,
 
     LayoutModule,
     MatToolbarModule,
