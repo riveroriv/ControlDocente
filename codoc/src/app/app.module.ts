@@ -22,6 +22,7 @@ import { SettingsComponent } from './inside/settings/settings.component';
 import { UsuariosComponent } from './inside/usuarios/usuarios.component';
 import { PasswordDialogComponent } from './inside/dialogs/password-dialog/password-dialog.component';
 import { PerfilDialogComponent } from './inside/dialogs/perfil-dialog/perfil-dialog.component';
+import { NewMatetriaDialogComponent } from './inside/dialogs/new-matetria-dialog/new-matetria-dialog.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './servicios/token-interceptor.service';
@@ -48,7 +49,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { NewMatetriaDialogComponent } from './inside/dialogs/new-matetria-dialog/new-matetria-dialog.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
@@ -121,7 +122,8 @@ export class Globales {
     MatDialogModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatStepperModule
   ],
   providers: [
     Globales,

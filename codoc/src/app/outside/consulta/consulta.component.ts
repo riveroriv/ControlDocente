@@ -84,9 +84,9 @@ export class ConsultaComponent implements OnInit {
 
         this.paginator._intl.firstPageLabel = 'Primera';
         this.paginator._intl.itemsPerPageLabel = 'Número de materias';
-        this.paginator._intl.lastPageLabel = 'última';
+        this.paginator._intl.lastPageLabel = 'Última';
         this.paginator._intl.nextPageLabel = 'Siguiente';
-        this.paginator._intl.previousPageLabel = 'Anterior';
+        this.paginator._intl.previousPageLabel = 'Previa';
       },
       error: (e) => {
         this.router.navigateByUrl('fallo_consulta');

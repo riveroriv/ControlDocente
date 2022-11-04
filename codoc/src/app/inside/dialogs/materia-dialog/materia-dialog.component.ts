@@ -17,6 +17,5 @@ export class MateriaDialogComponent implements OnInit {
   }
 
   constructor(private _formBuilder: FormBuilder) {
-   
   }
 }

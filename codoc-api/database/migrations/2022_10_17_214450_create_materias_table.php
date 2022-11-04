@@ -16,7 +16,7 @@ class CreateMateriasTable extends Migration
         Schema::create('materias', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->unsignedInteger('codigo')->primary();
+            $table->string('codigo')->primary();
             $table->string('nombre');
 
             $table->boolean('silabo')->default(false);

@@ -1,0 +1,21 @@
+.info-materia{
+    margin: 20px auto;
+}
+.input{
+    width: 100%;
+}
+.fila{
+    transition: 0.3s all;
+}
+.fila:hover{
+    background-color: #ddd;
+}
+.buscar{
+    width: 100%;
+}
+.docente{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px auto;
+}

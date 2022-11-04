@@ -17,7 +17,7 @@ class MateriaController extends Controller
      */
     public function crearMateria (Request $request){
         $datosValidados = $request->validate([
-            'codigo' => 'required|integer|unique:materias,codigo',
+            'codigo' => 'required|string|unique:materias,codigo',
             'nombre' => 'required|string|min:3',
             'docente' => 'required|integer|exists:docentes,codigo',
             'ciudad' => 'required|integer|exists:ciudades,id',
@@ -43,6 +43,7 @@ class MateriaController extends Controller
      */
     public function listarMateriasUsuario (Request $request){
         return  Materia::where('id_usuario', $request->user()->id)
+        ->orderBy('updated_at','desc')
         ->join('docentes', 'docentes.codigo', '=', 'materias.id_docente')
         ->join('ciudades', 'ciudades.id', '=', 'materias.id_ciudad')
         ->select('materias.*','docentes.nombre as docente', 'ciudades.nombre as ciudad')
@@ -60,7 +61,7 @@ class MateriaController extends Controller
                 'message' => 'No tienes permiso para realizar esta acción'
             ], 403
         );}
-        $materias = Materia::all();
+        $materias = Materia::all()->orderBy('updated_at','desc');
         return $materias;        
     }
     
@@ -71,7 +72,7 @@ class MateriaController extends Controller
      */
     public function actualizarMateria (Request $request){
         $datosValidados = $request->validate([
-            'codigo' => 'required|integer|exists:materias,codigo',
+            'codigo' => 'required|string|exists:materias,codigo',
             'nombre' => 'required|string|min:3',
             'docente' => 'required|integer|exists:docentes,codigo',
             'ciudad' => 'required|integer|exists:ciudades,id',
@@ -96,7 +97,7 @@ class MateriaController extends Controller
      */
     public function actualizarCampoMateria (Request $request){
         $datosValidados = $request->validate([
-            'codigo' => 'required|integer|exists:materias,codigo',
+            'codigo' => 'required|string|exists:materias,codigo',
             'campo' => 'required|integer',
             'valor' => 'required|integer',
         ]);
@@ -153,7 +154,7 @@ class MateriaController extends Controller
      */
     public function eliminarMateria (Request $request){
         $codigo = $request->validate([
-            'codigo' => 'required|integer|exists:materias,codigo',
+            'codigo' => 'required|string|exists:materias,codigo',
         ]);
         $codigo = $codigo['codigo'];
         $materia = Materia::where('codigo', $codigo);
@@ -183,10 +184,11 @@ class MateriaController extends Controller
      */
     public function listarMateriasDocente (Request $request){
         $codigo = $request->validate([
-            'codigo' => 'required|integer|exists:docentes,codigo',
+            'codigo' => 'required|string|exists:docentes,codigo',
         ]);
 
         return Materia::where('id_docente', $codigo)
+        ->orderBy('updated_at','desc')
         ->join('ciudades','materias.id_ciudad','=','ciudades.id')
         ->select('materias.codigo','materias.nombre','materias.parcial_1','materias.parcial_2','materias.parcial_3'
                 ,'materias.nota_1','materias.nota_2','materias.nota_3','materias.silabo'
@@ -201,7 +203,7 @@ class MateriaController extends Controller
      */
     public function listarMateria (Request $request){
         $codigo = $request->validate([
-            'codigo' => 'required|integer|exists:materias,codigo',
+            'codigo' => 'required|string|exists:materias,codigo',
         ]);
         return Materia::where('codigo', $codigo)->get();
     }
