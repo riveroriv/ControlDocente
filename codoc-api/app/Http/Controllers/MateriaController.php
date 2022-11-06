@@ -106,7 +106,7 @@ class MateriaController extends Controller
 
         $user = $request->user();
         if(!$user->tokenCan('admin')){
-            if($user->id != $materia->id_usuario){
+            if($user->id != $materia->first()->id_usuario){
                 return response()->json([
                     'message' => 'No tienes permiso para realizar esta acción'
                 ], 403);
@@ -161,7 +161,7 @@ class MateriaController extends Controller
         $user = $request->user();
         
         if(!$user->tokenCan('admin')){
-            if($user->id != $materia->id_usuario){
+            if($user->id != $materia->first()->id_usuario){
                 return response()->json([
                     'message' => 'No tienes permiso para realizar esta acción'
                 ], 403);
@@ -188,7 +188,7 @@ class MateriaController extends Controller
         ]);
 
         return Materia::where('id_docente', $codigo)
-        ->orderBy('updated_at','desc')
+        ->orderBy('materias.updated_at','desc')
         ->join('ciudades','materias.id_ciudad','=','ciudades.id')
         ->select('materias.codigo','materias.nombre','materias.parcial_1','materias.parcial_2','materias.parcial_3'
                 ,'materias.nota_1','materias.nota_2','materias.nota_3','materias.silabo'

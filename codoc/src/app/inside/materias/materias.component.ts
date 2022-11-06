@@ -107,7 +107,6 @@ export class MateriasComponent implements OnInit {
         arrayMaterias.push(m);
       }
       this.dataSource = new MatTableDataSource<Materia>(arrayMaterias.slice());
-      
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
