@@ -1,0 +1,17 @@
+.contenido{
+    display: flex;
+    flex-direction: column;
+}
+.botones {
+    display: flex;
+    justify-content: right;
+}
+.fila{
+    transition: 0.3s all;
+}
+.fila:hover{
+    background-color: #ddd;
+}
+.docente{
+    margin: 20px auto;
+}

@@ -20,7 +20,7 @@ class DocenteController extends Controller
         ]);
         Docente::create([
             'codigo' => $datosValidados['codigo'],
-            'nombre' => filter_var($datosValidados['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'nombre' => $datosValidados['nombre'],
         ]);
         return response()->json(
             [
@@ -50,7 +50,7 @@ class DocenteController extends Controller
         ]);
         Docente::where('codigo', $datosValidados['codigo'])
         ->update([
-            'nombre' => filter_var($datosValidados['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)
+            'nombre' => $datosValidados['nombre'],
         ]);
         
         return response()->json(

@@ -23,7 +23,7 @@ class CiudadController extends Controller
             'nombre' => 'required|string',
         ]);
         Ciudad::create([
-            'nombre' => filter_var($limpiado['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'nombre' => $limpiado['nombre'],
         ]);
         return response()->json([
             'message' => 'Ciudad añadida'
@@ -56,7 +56,7 @@ class CiudadController extends Controller
             'nombre' => 'required|string',
         ]);
         $ciudad = Ciudad::find($limpiado['id']);
-        $ciudad->nombre = filter_var($limpiado['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $ciudad->nombre = $limpiado['nombre'];
         $ciudad->save();
         return response()->json([
             'message' => 'Ciudad actualizada'

@@ -24,7 +24,7 @@ class MateriaController extends Controller
         ]);
         Materia::create([
             'codigo' => $datosValidados['codigo'],
-            'nombre' => filter_var($datosValidados['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'nombre' => $datosValidados['nombre'],
             'id_usuario' => $request->user()->id,
             'id_docente' => $datosValidados['docente'],
             'id_ciudad' => $datosValidados['ciudad']
@@ -79,7 +79,7 @@ class MateriaController extends Controller
         ]);
         Materia::where('codigo', $datosValidados['codigo'])
         ->update([
-            'nombre' => filter_var($datosValidados['nombre'], FILTER_SANITIZE_FULL_SPECIAL_CHARS),
+            'nombre' => $datosValidados['nombre'],
             'id_docente' => $datosValidados['docente'],
             'id_ciudad' => $datosValidados['ciudad']
         ]);

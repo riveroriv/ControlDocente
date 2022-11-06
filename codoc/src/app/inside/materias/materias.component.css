@@ -28,6 +28,7 @@
 }
 .mat-column-nombre{
     min-width: 140px;
+    text-transform: capitalize;
 }
 .mat-column-editar{
     margin: 0;
@@ -40,14 +41,17 @@
     margin: auto;
 }
 @media screen and (max-width: 900px) {
-    .mat-column-ciudad{
-        min-width: 100px;
+    .mat-column-nombre{
+        min-width: none;
     }
     .mat-column-ciudad{
         display: none;
     }
 }
 @media screen and (max-width: 800px) {
+    .mat-column-editar{
+        width: 100%;
+    } 
     .boton_materia{
         margin: 0;
         background-color: #673ab7;
@@ -76,7 +80,7 @@
 
     .mat-table .mat-cell {
         border-bottom: 1px solid #ddd;
-        display: flexbox;
+        display: flex;
         align-items: center;
         justify-content: space-between;
         height:20px;

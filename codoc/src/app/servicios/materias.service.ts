@@ -13,7 +13,7 @@ export interface Materia {
   providedIn: 'root'
 })
 
-export class MateriasService {
+export class MateriaService {
 
   constructor(private http:HttpClient, private globales: Globales) { }
 

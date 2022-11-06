@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CiudadService } from 'src/app/servicios/ciudad.service';
 import { DocenteService } from 'src/app/servicios/docente.service';
-import { MateriasService } from 'src/app/servicios/materias.service';
+import { MateriaService } from 'src/app/servicios/materias.service';
 
 export interface Ciudad {
   id: number,
@@ -37,7 +37,7 @@ export class NewMatetriaDialogComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(public ciudadService: CiudadService, public materiaService: MateriasService, public docenteService: DocenteService, private dialogRef: MatDialogRef<NewMatetriaDialogComponent>) {
+  constructor(public ciudadService: CiudadService, public materiaService: MateriaService, public docenteService: DocenteService, private dialogRef: MatDialogRef<NewMatetriaDialogComponent>) {
     
   }
 
@@ -55,7 +55,7 @@ export class NewMatetriaDialogComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         
-        this.paginator._intl.itemsPerPageLabel = 'Número de materias';
+        this.paginator._intl.itemsPerPageLabel = 'Docentes por página';
         this.paginator._intl.nextPageLabel = 'Siguiente';
         this.paginator._intl.previousPageLabel = 'Previa';
       },
@@ -78,7 +78,7 @@ export class NewMatetriaDialogComponent implements OnInit {
     this.nombre = nombre;
   }
   codigoAction(codigo: string){
-    this.codigo = codigo;
+    this.codigo = codigo.toUpperCase();
 
   }
   ciudadAction(ciudad: Ciudad){
@@ -92,15 +92,15 @@ export class NewMatetriaDialogComponent implements OnInit {
       docente: this.docente.codigo
     }).subscribe({
       next: (v) => {
-        this.close(true);
+        this.close('Materia creada', 1);
       },
       error: (e) => {
-        this.close(false);
+        this.close('Ha ocurrido un error', 2);
       }
     });
   }
-  close(funciono: boolean){
-    this.dialogRef.close(funciono);
+  close(mensaje: string = '', estado: number = 0){
+    this.dialogRef.close({mensaje: mensaje, estado: estado});
   }
   
 }

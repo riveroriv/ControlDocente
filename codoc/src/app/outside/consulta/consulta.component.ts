@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MateriasService } from '../../servicios/materias.service';
+import { MateriaService } from '../../servicios/materias.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -43,7 +43,7 @@ export class ConsultaComponent implements OnInit {
   codigo = 0;
   display = '';
 
-  constructor(private materias:MateriasService, private route: ActivatedRoute, public router: Router) {
+  constructor(private materias:MateriaService, private route: ActivatedRoute, public router: Router) {
     this.codigo = Number(route.snapshot.params['codigo']);
   }
 

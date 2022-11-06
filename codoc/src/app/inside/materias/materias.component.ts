@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MateriasService } from '../../servicios/materias.service';
+import { MateriaService } from '../../servicios/materias.service';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
@@ -22,6 +22,8 @@ export interface Materia {
   planilla:number;
   ciudad:string;
   docente:string;
+  id_docente:number;
+  id_ciudad:number;
 }
 
 @Component({
@@ -41,26 +43,34 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(private materias:MateriasService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+  constructor(public materias:MateriaService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this.cargarMaterias();
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(MateriaDialogComponent);
+  editarMateria(materia: Materia) {
+    const dialogRef = this.dialog.open(MateriaDialogComponent, { data: materia });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if(result.estado != 0){
+        this.snackBar(result.mensaje);
+      }
+      if(result.estado == 1){
+        this.cargarMaterias();
+      }
     });
   }
+
   nuevaMateria(){
     const nuevaMateria = this.dialog.open(NewMatetriaDialogComponent);
 
     nuevaMateria.afterClosed().subscribe(result => {
-      this.snackBar((result? 'Materia creada':'Ha ocurrido un problema'));
-      if(result){
+      if(result.estado != 0){
+        this.snackBar(result.mensaje);
+      }
+      if(result.estado == 1){
         this.cargarMaterias();
       }
     });
@@ -80,7 +90,7 @@ export class MateriasComponent implements OnInit {
       for (const materia of this.materiasDocente) {
         const m:Materia = { 
           codigo: materia.codigo,
-          nombre: materia.nombre,
+          nombre: materia.nombre.toLowerCase(),
           silabo: materia.silabo,
           parcial_1: materia.parcial_1,
           parcial_2: materia.parcial_2,
@@ -91,6 +101,8 @@ export class MateriasComponent implements OnInit {
           planilla: materia.planilla,
           ciudad: materia.ciudad,
           docente: materia.docente,
+          id_ciudad: materia.id_ciudad,
+          id_docente: materia.id_docente,
         };
         arrayMaterias.push(m);
       }

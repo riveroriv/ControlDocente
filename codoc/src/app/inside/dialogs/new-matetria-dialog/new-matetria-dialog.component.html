@@ -24,7 +24,7 @@
 			</div>
 
 			<mat-dialog-actions>
-				<button mat-flat-button mat-dialog-close color="accent">Cancelar</button>
+				<button mat-flat-button  (click)="close()" color="accent">Cancelar</button>
 				<span class="spacer"></span>
 				<button mat-icon-button matStepperNext><mat-icon>navigate_next</mat-icon></button>
 			</mat-dialog-actions>
@@ -62,7 +62,7 @@
 			<mat-paginator [pageSizeOptions]="[10]"  aria-label="Seleccione el número de materias"></mat-paginator>
 
 			<mat-dialog-actions>
-				<button mat-flat-button mat-dialog-close color="accent">Cancelar</button>
+				<button mat-flat-button  (click)="close()" color="accent">Cancelar</button>
 				<span class="spacer"></span>
 				<button mat-icon-button matStepperPrevious><mat-icon>navigate_before</mat-icon></button>
 				<button mat-icon-button matStepperNext><mat-icon>navigate_next</mat-icon></button>
@@ -78,7 +78,7 @@
 			</div>
 
 			<mat-dialog-actions>
-				<button mat-flat-button mat-dialog-close color="accent">Cancelar</button>
+				<button mat-flat-button color="accent" (click)="close()">Cancelar</button>
 				<span class="spacer"></span>
 				<button mat-icon-button matStepperPrevious><mat-icon>navigate_before</mat-icon></button>
 				<button mat-flat-button color="primary" cdkFocusInitia (click)="crearMateria()">Guardar</button>
