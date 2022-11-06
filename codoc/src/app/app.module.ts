@@ -50,6 +50,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatStepperModule} from '@angular/material/stepper';
+import { NewDocenteDialogComponent } from './inside/dialogs/new-docente-dialog/new-docente-dialog.component';
+import { DocenteDialogComponent } from './inside/dialogs/docente-dialog/docente-dialog.component';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
@@ -93,6 +95,8 @@ export class Globales {
     PasswordDialogComponent,
     PerfilDialogComponent,
     NewMatetriaDialogComponent,
+    NewDocenteDialogComponent,
+    DocenteDialogComponent,
   ],
   imports: [
     BrowserModule,

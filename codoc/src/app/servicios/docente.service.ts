@@ -22,7 +22,7 @@ export class DocenteService {
     return this.http.get(this.globales.codocAPI +'docentes'); 
   }
 
-  actualizarDocente(codigo: number, nombre: number){
+  actualizarDocente(codigo: number, nombre: string){
     return this.http.put(this.globales.codocAPI +'docente', {codigo: codigo, nombre: nombre});
   }
 

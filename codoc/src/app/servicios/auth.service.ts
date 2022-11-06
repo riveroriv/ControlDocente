@@ -44,6 +44,22 @@ export class AuthService {
     return this.http.post(this.globales.codocAPI + 'isAdmin', {});
   }
 
+  setTipo(tipo: string){
+    this.cookies.set("tipo", tipo);
+  }
+  getTipo(){
+    return this.cookies.get("tipo");
+  }
+  deleteTipo(){
+    this.cookies.delete("tipo");
+  }
+  deleteCookies(){
+    this.cookies.deleteAll();
+  }
+
+  hasTipo(): boolean {
+    return this.getTipo() != '';
+  }
   hasToken(): boolean{
     return this.getToken() != '';
   }

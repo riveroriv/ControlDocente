@@ -1,5 +1,6 @@
 <?php
 
+use App\Docente;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ class CreateDocentesTable extends Migration
             $table->string('nombre');
             $table->timestamps();
         });
+        Docente::create(['codigo' => 0, 'nombre' => 'No asignado']);
     }
 
     /**

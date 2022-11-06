@@ -3,47 +3,39 @@
 </mat-toolbar>
 
 <div class="opciones">
-    <mat-form-field  appearance="fill">
-        <mat-label>Buscar por</mat-label>
-        <mat-select  [(value)]="buscarPor">
-          <mat-option value="nombre">Nombre</mat-option>
-          <mat-option value="codigo">Código</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-        <mat-form-field appearance="fill" class="buscar">
-          <mat-label>Buscar</mat-label>
-          <input type="text"
-                 placeholder="{{buscarPor}}"
-                 aria-label="Number"
-                 matInput
-                 [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option>
-              hola
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-
-        <button  mat-mini-fab color="primary" 
-        matTooltip="Añadir docente">
-          <mat-icon>add</mat-icon>
-        </button>
+  <mat-form-field class="buscar">
+    <mat-label>Buscar docente</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input type="text"
+            placeholder="Nombre o código"
+            matInput
+            (keyup)="filtro($event)">
+  </mat-form-field>
+        
+  <button  mat-button color="primary" aria-label="Añadir docente" (click)="nuevoDocente()">
+    <mat-icon>add</mat-icon>Añadir docente
+  </button>
 </div>
 
 <mat-divider></mat-divider>
 
-<div class="docentes">
-    <mat-selection-list #shoes [multiple]="false">
-        <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-            <div class="opcion">
-            <p>55800</p>
-            <p>{{shoe}}</p>
-            <button mat-icon-button>
-                <!--(click)="openDialog()"-->
-                <mat-icon>edit</mat-icon>
-            </button>
-            </div>
-        </mat-list-option>
-      </mat-selection-list>
+<div class="docentes mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="codigo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+      <mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Materia</mat-header-cell>
+      <mat-cell *matCellDef="let docente" data-label="nombre">
+        {{docente.nombre}}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="docente" (click)="editarDocente(row)"></mat-row>
+  </mat-table>
+  
+<mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons aria-label="Número de docetes por página"></mat-paginator>
 </div>

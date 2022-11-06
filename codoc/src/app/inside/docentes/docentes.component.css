@@ -2,3 +2,16 @@
     display: flex;
     flex-direction: row;
 }
+.docentes{
+    width: 90%;
+    margin: auto;
+}
+.docente:hover{
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+}
+@media screen and (max-width: 800px) {
+    .docentes{
+        width: 100%;
+    }
+}

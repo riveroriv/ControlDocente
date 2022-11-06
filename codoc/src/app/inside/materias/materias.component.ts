@@ -54,12 +54,14 @@ export class MateriasComponent implements OnInit {
     const dialogRef = this.dialog.open(MateriaDialogComponent, { data: materia });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.estado != 0){
-        this.snackBar(result.mensaje);
-      }
-      if(result.estado == 1){
-        this.cargarMaterias();
-      }
+      try {
+        if(result.estado != 0){
+          this.snackBar(result.mensaje);
+        }
+        if(result.estado == 1){
+          this.cargarMaterias();
+        }
+      } catch (error) {}
     });
   }
 
@@ -67,12 +69,14 @@ export class MateriasComponent implements OnInit {
     const nuevaMateria = this.dialog.open(NewMatetriaDialogComponent);
 
     nuevaMateria.afterClosed().subscribe(result => {
-      if(result.estado != 0){
-        this.snackBar(result.mensaje);
-      }
-      if(result.estado == 1){
-        this.cargarMaterias();
-      }
+      try {
+        if(result.estado != 0){
+          this.snackBar(result.mensaje);
+        }
+        if(result.estado == 1){
+          this.cargarMaterias();
+        }
+      } catch (error) {}
     });
   }
 
@@ -111,7 +115,7 @@ export class MateriasComponent implements OnInit {
       this.dataSource.sort = this.sort;
 
       this.paginator._intl.firstPageLabel = 'Primera';
-      this.paginator._intl.itemsPerPageLabel = 'Número de materias';
+      this.paginator._intl.itemsPerPageLabel = 'Materias por página';
       this.paginator._intl.lastPageLabel = 'Última';
       this.paginator._intl.nextPageLabel = 'Siguiente';
       this.paginator._intl.previousPageLabel = 'Previa';

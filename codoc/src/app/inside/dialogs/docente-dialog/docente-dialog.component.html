@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Editar docente</h2>
+
+<mat-dialog-content class="mat-typography contenido">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Código</mat-label>
+        <input type="number" matInput disabled="" value="{{docente.codigo}}">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput #nombreDocente value="{{docente.nombre}}">
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="botones" *ngIf="isAdmin">
+    <button mat-flat-button (click)="eliminarDocente()" color="warn">Eliminar</button>
+</mat-dialog-actions>
+
+<mat-dialog-actions class="botones">
+    <button mat-flat-button (click)="close()">Cancelar</button>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" cdkFocusInitia (click)="actualizarDocente(nombreDocente.value)">Guardar</button>
+</mat-dialog-actions>

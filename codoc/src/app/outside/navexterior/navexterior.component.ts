@@ -13,11 +13,13 @@ import { AuthService } from 'src/app/servicios/auth.service';
 export class NavexteriorComponent {
 
   constructor(private router:Router, public authService: AuthService) {
+    /*
     if(this.authService.hasToken()){
       //dialog
       console.log(this.authService.hasToken());
       this.authService.redirigirInside();
     }
+    */
   }
 
   goLogin(){

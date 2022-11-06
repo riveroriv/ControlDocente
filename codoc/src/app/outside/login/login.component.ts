@@ -23,17 +23,19 @@ export class LoginComponent implements OnInit {
 
   login(codigo: string, password: string) {
     if ( this.codigoControl.status == 'INVALID' || this.passwordControl.status == 'INVALID' ){
-     this.snackBar('Credenciales no válidos');
+      this.snackBar('Credenciales no válidos');
     } else {
       const credenciales = {codigo: Number(codigo), password: password};
-      this.authService.login(credenciales).subscribe(
-        data => {
+      this.authService.login(credenciales).subscribe({
+        next: (data) => {
+          this.authService.deleteCookies();
           this.authService.setToken(data.access_token);
           this.router.navigateByUrl('');
         },
-        error => {
+        error: (error) => {
           this.snackBar(error.error.message);
-        });
+        }
+      });
     }
   }
   snackBar(message: string){

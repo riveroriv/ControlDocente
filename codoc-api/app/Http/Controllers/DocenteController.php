@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Docente;
+use App\Materia;
 
 class DocenteController extends Controller
 {
@@ -35,7 +36,7 @@ class DocenteController extends Controller
      * @return Response
      */
     public function listarDocentes (){
-        return Docente::all();
+        return Docente::where('codigo', '!=', '0')->get();
     }
     
     /**
@@ -74,6 +75,7 @@ class DocenteController extends Controller
         $datosValidados = $request->validate([
             'codigo' => 'required|integer|exists:docentes,codigo',
         ]);
+        Materia::where('id_docente', $datosValidados['codigo'])->update(['id_docente' => 0]);
         Docente::where('codigo', $datosValidados['codigo'])->delete();
         return response()->json(
             [

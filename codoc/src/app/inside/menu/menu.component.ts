@@ -50,7 +50,9 @@ export class MenuComponent {
     this.authService.isAdmin().subscribe({
       next: (u) => {
         this.isAdmin = true;
-      }
+        this.authService.setTipo('1');
+      },
+      error: (e) => this.authService.setTipo('0')
     });
   }
   
@@ -58,6 +60,7 @@ export class MenuComponent {
     this.authService.logout().subscribe();
     this.authService.deleteToken();
     this.authService.redirigirOutside();
+    this.authService.deleteCookies();
   }
 
   changePassword(){

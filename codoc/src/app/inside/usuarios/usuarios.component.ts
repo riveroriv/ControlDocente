@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
@@ -8,13 +11,17 @@ import { AuthService } from 'src/app/servicios/auth.service';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
-  }
+  constructor(public authService: AuthService, public router: Router, public dialog: MatDialog, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.authService.isAdmin().subscribe({
-      error: (e) => this.authService.redirigirInside()
+    if(this.authService.getTipo() !== "1"){
+      this.router.navigateByUrl('');
+      this.snackBar('No autorizado');
+    }
+  }
+  snackBar(message: string){
+    this._snackBar.open(message, 'Cerrar', {
+      duration: 5 * 1000,
     });
   }
-
 }
