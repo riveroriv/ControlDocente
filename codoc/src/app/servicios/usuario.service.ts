@@ -40,7 +40,11 @@ export class UsuarioService {
   }
 
   cambiarPasswordAdmin(password: string, usuario:number){
-    return this.http.put(this.globales.codocAPI +"cambiarPasswordAdmin", {password: password, usuario: usuario});
+    return this.http.put(this.globales.codocAPI +"cambiarPasswordAdmin", {password: password, codigo: usuario});
+  }
+
+  cambiarTipo(codigo: number, valor: number){
+    return this.http.patch(this.globales.codocAPI +"usuario", {codigo: codigo, valor: valor});
   }
 
   usuario() {

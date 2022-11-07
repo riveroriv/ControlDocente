@@ -10,7 +10,7 @@ import { DocenteService } from 'src/app/servicios/docente.service';
   styleUrls: ['./docente.component.css']
 })
 export class DocenteComponent implements OnInit {
- 
+
   hide = true;
   codigoControl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{4,}')]);
   duracionSnackBar: number = 3;

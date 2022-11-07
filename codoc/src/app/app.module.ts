@@ -52,6 +52,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatStepperModule} from '@angular/material/stepper';
 import { NewDocenteDialogComponent } from './inside/dialogs/new-docente-dialog/new-docente-dialog.component';
 import { DocenteDialogComponent } from './inside/dialogs/docente-dialog/docente-dialog.component';
+import { NewUsuarioDialogComponent } from './inside/dialogs/new-usuario-dialog/new-usuario-dialog.component';
+import { AdminPasswordDialogComponent } from './inside/dialogs/admin-password-dialog/admin-password-dialog.component';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
@@ -97,6 +99,8 @@ export class Globales {
     NewMatetriaDialogComponent,
     NewDocenteDialogComponent,
     DocenteDialogComponent,
+    NewUsuarioDialogComponent,
+    AdminPasswordDialogComponent,
   ],
   imports: [
     BrowserModule,

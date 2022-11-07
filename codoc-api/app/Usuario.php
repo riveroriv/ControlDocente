@@ -27,6 +27,7 @@ class Usuario extends Authenticatable
         'tipo',
         'codigo',
         'password',
+        'tipo',
     ];
 
     /**
@@ -37,7 +38,6 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'tipo',
     ];
 
     /**

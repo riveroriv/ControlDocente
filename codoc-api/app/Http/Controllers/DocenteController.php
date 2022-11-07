@@ -36,7 +36,7 @@ class DocenteController extends Controller
      * @return Response
      */
     public function listarDocentes (){
-        return Docente::where('codigo', '!=', '0')->get();
+        return Docente::where('codigo', '!=', '0')->orderBy('codigo')->get();
     }
     
     /**

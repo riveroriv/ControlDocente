@@ -1,0 +1,38 @@
+.opcion{
+    display: flex;
+    flex-direction: row;
+}
+.usuarios{
+    width: 90%;
+    margin: auto;
+}
+.usuario:hover{
+    background-color: rgb(240, 240, 240);
+}
+.mat-column-tipo{
+    max-width: 50px;
+}
+.mat-column-opciones{
+    max-width: 80px;
+}
+.admin-boton, .password-boton,.delete-boton{
+    transition: all 0.4s;
+}
+.password-boton:hover{
+    color: #673ab7;
+}
+.admin-boton:hover{
+    background-color: #ffd740;
+    color: #fff;
+}
+.delete-boton:hover{
+    transform: rotate(15deg);
+}
+@media screen and (max-width: 800px) {
+    .usuarios{
+        width: 100%;
+    }
+    .mat-column-correo{
+        display: none;
+    }
+}

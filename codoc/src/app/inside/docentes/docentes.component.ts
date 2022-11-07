@@ -22,13 +22,16 @@ export class DocentesComponent implements OnInit {
   
   displayedColumns: string[] = ['codigo', 'nombre'];
   dataSource!: MatTableDataSource<Docente>;
-  materiasDocente:any = [];
   duracionSnackBar = 5;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(public docenteService: DocenteService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(
+    public docenteService: DocenteService,
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
     this.cargarDocentes();
@@ -74,9 +77,9 @@ export class DocentesComponent implements OnInit {
     });
   }
   editarDocente(docente: Docente){
-    const nuevaMateria = this.dialog.open(DocenteDialogComponent, { data: docente });
+    const editarMateria = this.dialog.open(DocenteDialogComponent, { data: docente });
 
-    nuevaMateria.afterClosed().subscribe(result => {
+    editarMateria.afterClosed().subscribe(result => {
       try {
         if(result.estado != 0){
           this.snackBar(result.mensaje);

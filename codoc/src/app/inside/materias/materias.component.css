@@ -23,6 +23,12 @@
     background-color: #673ab7;
     color: #fff;
 }
+.editar-boton{
+    transition: all 0.4s ease;
+}
+.editar-boton:hover{
+    transform: rotate(45deg);
+}
 .mat-column-ciudad{
     min-width: max-content;
 }

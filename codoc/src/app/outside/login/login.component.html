@@ -6,14 +6,14 @@
     <form (ngSubmit)="login(codigo.value, password.value)"> 
       <mat-card-content>
         <mat-form-field appearance="fill">
-            <mat-label>Código</mat-label>
-            <input matInput [formControl]="codigoControl" #codigo tabindex="1">
-            <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
-               Ingrese un código válido
-              </mat-error>
-            <mat-error *ngIf="codigoControl.hasError('required')">
-              Su código es <strong>necesario</strong>
+          <mat-label>Código</mat-label>
+          <input matInput [formControl]="codigoControl" #codigo tabindex="1">
+          <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
+            Ingrese un código válido
             </mat-error>
+          <mat-error *ngIf="codigoControl.hasError('required')">
+            Su código es <strong>necesario</strong>
+          </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Contraseña</mat-label>

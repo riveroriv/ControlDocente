@@ -56,6 +56,12 @@ class UsuarioController extends Controller
             'valor' => 'required|integer'
         ]);
 
+        if($datosValidados['codigo'] == $request->user()->codigo){
+            return response()->json([
+                'message' => 'No puedes cambiar tu permiso'
+            ], 400);
+        }
+
         $user = Usuario::where('codigo', $datosValidados['codigo'])->first();
         if($datosValidados['valor'] !=0 && $datosValidados['valor'] !=1){
             return response()->json(['message' => 'Tipo no válido'], 400);
@@ -78,7 +84,12 @@ class UsuarioController extends Controller
         $codigo = $request->validate([
             'codigo' => 'required|integer|exists:usuarios,codigo',
         ]);
-        $usuario = Usuario::where('codigo', $codigo)->first();
+        if($codigo['codigo'] == $request->user()->codigo){
+            return response()->json([
+                'message' => 'No te puedes eliminar'
+            ], 400);
+        }
+        $usuario = Usuario::where('codigo', $codigo['codigo'])->first();
         $usuario->delete();
 
         return response()->json([
