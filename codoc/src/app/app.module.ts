@@ -7,11 +7,11 @@ import { NgChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './inside/home/home.component';
 import { LoginComponent } from './outside/login/login.component';
 import { DocenteComponent } from './outside/docente/docente.component';
 import { ErrorComponent } from './error/error.component';
 import { ConsultaComponent } from './outside/consulta/consulta.component';
+import { InfoComponent } from './inside/info/info.component';
 
 import { NavexteriorComponent } from './outside/navexterior/navexterior.component';
 import { MateriasComponent } from './inside/materias/materias.component';
@@ -23,6 +23,10 @@ import { UsuariosComponent } from './inside/usuarios/usuarios.component';
 import { PasswordDialogComponent } from './inside/dialogs/password-dialog/password-dialog.component';
 import { PerfilDialogComponent } from './inside/dialogs/perfil-dialog/perfil-dialog.component';
 import { NewMatetriaDialogComponent } from './inside/dialogs/new-matetria-dialog/new-matetria-dialog.component';
+import { NewDocenteDialogComponent } from './inside/dialogs/new-docente-dialog/new-docente-dialog.component';
+import { DocenteDialogComponent } from './inside/dialogs/docente-dialog/docente-dialog.component';
+import { NewUsuarioDialogComponent } from './inside/dialogs/new-usuario-dialog/new-usuario-dialog.component';
+import { AdminPasswordDialogComponent } from './inside/dialogs/admin-password-dialog/admin-password-dialog.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './servicios/token-interceptor.service';
@@ -49,17 +53,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatStepperModule} from '@angular/material/stepper';
-import { NewDocenteDialogComponent } from './inside/dialogs/new-docente-dialog/new-docente-dialog.component';
-import { DocenteDialogComponent } from './inside/dialogs/docente-dialog/docente-dialog.component';
-import { NewUsuarioDialogComponent } from './inside/dialogs/new-usuario-dialog/new-usuario-dialog.component';
-import { AdminPasswordDialogComponent } from './inside/dialogs/admin-password-dialog/admin-password-dialog.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const rutas:Routes = [
   {path:'', component:MenuComponent, 
     children: [
       {path: '', component: MateriasComponent, pathMatch: 'full'},
-      {path:'informacion', component: HomeComponent},
+      {path:'informacion', component: InfoComponent},
       {path:'materias', component: MateriasComponent},
       {path:'docentes', component: DocentesComponent},
       {path:'reportes', component: ReportesComponent},
@@ -85,7 +86,6 @@ export class Globales {
     DocenteComponent,
     ConsultaComponent,
     ErrorComponent,
-    HomeComponent,
     NavexteriorComponent,
     MenuComponent,
     MateriasComponent,
@@ -101,6 +101,7 @@ export class Globales {
     DocenteDialogComponent,
     NewUsuarioDialogComponent,
     AdminPasswordDialogComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,7 +132,8 @@ export class Globales {
     MatCheckboxModule,
     MatSnackBarModule,
     MatPaginatorModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTabsModule
   ],
   providers: [
     Globales,

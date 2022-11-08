@@ -29,6 +29,14 @@ export class MateriaService {
     return this.http.get(this.globales.codocAPI +'materias/all');
   }
 
+  getMateriasReport(){
+    return this.http.get(this.globales.codocAPI +'materias/incumplimiento');
+  }
+
+  getDocentesReport(){
+    return this.http.get(this.globales.codocAPI +'docentes/incumplimiento');
+  }
+
   getMateria(codigo: string){
     return this.http.get(this.globales.codocAPI +'materia', {params: {codigo: codigo}});
   }

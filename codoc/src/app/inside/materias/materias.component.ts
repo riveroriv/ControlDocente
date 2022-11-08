@@ -43,7 +43,11 @@ export class MateriasComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(public materias:MateriaService, public dialog: MatDialog, private _snackBar: MatSnackBar) {
+  constructor(
+    public materias:MateriaService,
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
+    ) {
   }
 
   ngOnInit(): void {

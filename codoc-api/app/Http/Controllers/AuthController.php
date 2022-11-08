@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use App\Usuario;
 
 class AuthController extends Controller
@@ -37,6 +38,7 @@ class AuthController extends Controller
 
     public function login(Request $request){
         if(!Auth::attempt($request->only('codigo', 'password'))){
+            //Log::alert("Fallo de autenticación con credenciales: usuario = ". $request['codigo'] ." and password = ". $request['password']);
             return response()->json([
                 'message' => 'Credenciales no válidos',
             ], 401

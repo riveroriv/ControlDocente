@@ -47,9 +47,46 @@ class MateriaController extends Controller
         ->join('docentes', 'docentes.codigo', '=', 'materias.id_docente')
         ->join('ciudades', 'ciudades.id', '=', 'materias.id_ciudad')
         ->select('materias.*','docentes.nombre as docente', 'ciudades.nombre as ciudad')
+        ->get();
+    }
+
+    /**
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function listarMateriasOrderByIncumplimiento (Request $request){
+        return  Materia::where('id_usuario', $request->user()->id)
+        ->join('docentes', 'docentes.codigo', '=', 'materias.id_docente')
+        ->join('ciudades', 'ciudades.id', '=', 'materias.id_ciudad')
+        ->select('materias.*','docentes.nombre as docente', 'ciudades.nombre as ciudad')
+        ->selectRaw('silabo + parcial_1 + parcial_2 + parcial_3 + nota_1 + nota_2 + nota_3 + planilla as cumplimiento')
+        ->orderBy('cumplimiento', 'ASC')
         ->get();    
     }
     
+    /**
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function listarDocentesOrderByIncumplimiento (Request $request){
+        return  Materia::where('id_usuario', $request->user()->id)
+        ->join('docentes', 'docentes.codigo', '=', 'materias.id_docente')
+        ->select('materias.id_docente as codigo', 'docentes.nombre')
+        ->selectRaw('COUNT(materias.codigo) as materias')
+        ->selectRaw('SUM(materias.silabo) as silabo')
+        ->selectRaw('SUM(materias.parcial_2) as parcial_1')
+        ->selectRaw('SUM(materias.parcial_1) as parcial_2')
+        ->selectRaw('SUM(materias.parcial_3) as parcial_3')
+        ->selectRaw('SUM(materias.nota_1) as nota_1')
+        ->selectRaw('SUM(materias.nota_2) as nota_2')
+        ->selectRaw('SUM(materias.nota_3) as nota_3')
+        ->selectRaw('SUM(materias.planilla) as planilla')
+        ->groupByRaw('materias.id_docente, docentes.nombre')
+        ->get();    
+    }
+
     /**
      * 
      * @param Request $request

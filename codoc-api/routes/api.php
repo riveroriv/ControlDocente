@@ -58,4 +58,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::patch('/materia', 'MateriaController@actualizarCampoMateria');
     Route::delete('/materia', 'MateriaController@eliminarMateria');
 
+    
+    Route::get('/materias/incumplimiento', 'MateriaController@listarMateriasOrderByIncumplimiento');
+    Route::get('/docentes/incumplimiento', 'MateriaController@listarDocentesOrderByIncumplimiento');
 });

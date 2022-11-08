@@ -1,3 +1,165 @@
 <mat-toolbar class="segunda-fila">
     <span>Reportes</span>
 </mat-toolbar>
+
+<mat-tab-group>
+    <mat-tab label="Docentes">
+        <div class="docente_report">
+            <div class="grafico">
+                <canvas baseChart
+                    [data]="barChartData"
+                    [options]="barChartOptions"
+                    [type]="barChartType">
+                </canvas>
+            </div>
+        
+            <div class="docentes mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort #docenteSort="matSort">
+                    <ng-container matColumnDef="codigo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="nombre">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Docente</mat-header-cell>
+                    <mat-cell *matCellDef="let docente" data-label="nombre" class="nombre"> {{docente.nombre}} </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="silabo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Sílabo</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="sílabo">{{docente.silabo}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="parcial_1">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>P1</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente"  data-label="primer parcial">{{docente.parcial_1}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="parcial_2">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>P2</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="segundo parcial">{{docente.parcial_2}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="parcial_3">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>P3</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="parcial final">{{docente.parcial_3}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="nota_1">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>N1</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="nota 1p">{{docente.nota_1}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="nota_2">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>N2</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="nota 2p">{{docente.nota_2}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="nota_3">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>N3</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente"  data-label="nota pf">{{docente.nota_3}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="planilla">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Planilla</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente"  data-label="planilla">{{docente.planilla}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="materias">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Materias </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.materias}} </mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="cumple">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon class="cumple-boton" matTooltip="completados">check_circle_outline</mat-icon></mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.cumple | percent}}</mat-cell>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="falta">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon class="falta-boton" matTooltip="faltantes">highlight_off</mat-icon></mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.falta | percent}}</mat-cell>
+                    </ng-container>
+        
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="grafico(row)" class="docente"></mat-row>
+                </mat-table>
+                <mat-paginator #paginatorDocentes="matPaginator" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons aria-label="Seleccione el número de materias"></mat-paginator>
+            </div>
+        </div>
+        
+    </mat-tab>
+    <mat-tab label="Materias">
+    
+        <div class="docentes mat-elevation-z8">
+            <mat-table [dataSource]="dataSourceMaterias" matSort #materiaSort="matSort">
+                <ng-container matColumnDef="codigo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Docente</mat-header-cell>
+                <mat-cell *matCellDef="let docente" data-label="nombre" class="nombre"> {{docente.nombre}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="silabo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Sílabo</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="sílabo">{{docente.silabo}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="parcial_1">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>P1</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente"  data-label="primer parcial">{{docente.parcial_1}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="parcial_2">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>P2</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="segundo parcial">{{docente.parcial_2}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="parcial_3">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>P3</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="parcial final">{{docente.parcial_3}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="nota_1">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>N1</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="nota 1p">{{docente.nota_1}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="nota_2">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>N2</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="nota 2p">{{docente.nota_2}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="nota_3">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>N3</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let docente"  data-label="nota pf">{{docente.nota_3}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="planilla">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Planilla</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let docente"  data-label="planilla">{{docente.planilla}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="materias">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Materias </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.materias}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="cumplimiento">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon class="cumple-boton" matTooltip="completados">check_circle_outline</mat-icon></mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.cumplimiento/8 | percent}}</mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumnsMaterias"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsMaterias;" class="docente"></mat-row>
+            </mat-table>
+            <mat-paginator  #paginatorMaterias="matPaginator" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons aria-label="Seleccione el número de materias"></mat-paginator>
+        </div>
+        
+    </mat-tab>
+    <mat-tab label="Usuarios" *ngIf="isAdmin">
+        
+    </mat-tab>
+</mat-tab-group>

@@ -73,7 +73,7 @@
     .mat-table {
         border: 0;
         vertical-align: middle
-      }
+    }
     
     .mat-table caption {
     font-size: 1em;
@@ -92,7 +92,7 @@
         justify-content: space-between;
         height:20px;
         padding-left: 0;
-      }
+    }
     .nombre{
         text-align: right;
         font-weight: bold;

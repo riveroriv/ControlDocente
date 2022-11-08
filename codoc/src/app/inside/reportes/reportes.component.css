@@ -1,0 +1,66 @@
+.cumple-boton{
+    color: rgb(17, 129, 17);
+}
+.falta-boton{
+    color: rgb(210, 43, 43);
+}
+.grafico{
+    width: 40%;
+    margin: 20px auto;
+}
+.docente_report{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.mat-column-nombre{
+    flex-grow: 2;
+}
+.docente{
+    transition: all 0.4s;
+}
+.docente:hover{
+    background-color: rgb(221, 221, 221);
+}
+.mat-column-materias{
+    border-left: 1px solid #555;
+    border-right: 1px solid #555;
+}
+.mat-column-falta{
+    border-right: 1px solid #555;
+}
+.mat-column-silabo,
+.mat-column-parcial_1,
+.mat-column-parcial_2,
+.mat-column-parcial_3,
+.mat-column-nota_1,
+.mat-column-nota_2,
+.mat-column-nota_3,
+.mat-column-planilla,
+.mat-column-materias,
+.mat-column-cumple,
+.mat-column-falta
+{
+    justify-content: center;
+}
+@media screen and (max-width: 900px) {
+    .grafico{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 700px) {
+    .grafico{
+        width: 90%;
+    }
+    .mat-column-silabo,
+    .mat-column-parcial_1,
+    .mat-column-parcial_2,
+    .mat-column-parcial_3,
+    .mat-column-nota_1,
+    .mat-column-nota_2,
+    .mat-column-nota_3,
+    .mat-column-planilla
+    {
+        display: none;
+    }
+}

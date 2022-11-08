@@ -30,9 +30,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @media (max-width: 600px) {
   .buscar{
       margin: 0;
+      width: 100%;
+  }
+  .opciones button{
+    margin: auto;
   }
   .opciones{
       flex-direction: column;
-      justify-content: center;
   }
 }
