@@ -1,0 +1,8 @@
+.ciudades{
+    margin: 20px;
+    padding: 20px;
+}
+.vista{
+    display: flex;
+    flex-direction: row;
+}

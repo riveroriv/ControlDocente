@@ -1,3 +1,29 @@
 <mat-toolbar class="segunda-fila">
     <span>Ajustes</span>
 </mat-toolbar>
+<div class="vista">
+    <div class="ciudades mat-elevation-z5">
+        <h3>Ciudades</h3>
+        <mat-selection-list #ciudadesOpciones [multiple]="false">
+            <mat-list-option *ngFor="let ciudad of ciudades" [value]="ciudad">
+                {{ciudad.nombre}}
+            </mat-list-option>
+        </mat-selection-list>
+
+        <mat-form-field class="example-full-width" appearance="fill" *ngIf="ciudadesOpciones.selectedOptions.selected[0]!=null">
+            <mat-label>Ciudad {{ciudadesOpciones.selectedOptions.selected[0].value.id}}</mat-label>
+            <input type="text" matInput placeholder="Nombre ciudad" value="{{ciudadesOpciones.selectedOptions.selected[0].value.nombre}}" #editarNombre>
+            <button matSuffix mat-icon-button aria-label="Guardar" matTooltip="Guardar" (click)="actualizar(ciudadesOpciones.selectedOptions.selected[0].value.id, editarNombre.value)">
+                <mat-icon>save</mat-icon>
+            </button>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nueva ciudad</mat-label>
+            <input type="text" matInput placeholder="Nombre ciudad" #nuevaCiudadNombre>
+            <button matSuffix mat-icon-button aria-label="Guardar" matTooltip="Añadir" (click)="nuevaCiudad(nuevaCiudadNombre.value)">
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+</div>
