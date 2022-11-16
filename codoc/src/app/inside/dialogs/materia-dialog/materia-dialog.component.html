@@ -24,7 +24,8 @@
     <input type="text"
         placeholder="Nombre o código"
         matInput
-        (keyup)="filtro($event)">
+        (keyup)="filtro($event)"
+        autocomplete="off">
   </mat-form-field>
 
   <mat-table [dataSource]="dataSource" matSort>

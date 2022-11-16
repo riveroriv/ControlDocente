@@ -9,9 +9,13 @@ import { Usuario } from '../../usuarios/usuarios.component';
   templateUrl: './admin-password-dialog.component.html',
   styleUrls: ['./admin-password-dialog.component.css']
 })
+
 export class AdminPasswordDialogComponent implements OnInit {
 
-  passwordControl = new FormControl('', [Validators.required, Validators.pattern(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/)]);
+  passwordControl = new FormControl('', [
+    Validators.required, 
+    Validators.pattern(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/)
+  ]);
 
   constructor(
     public usuarioService: UsuarioService,
@@ -21,9 +25,11 @@ export class AdminPasswordDialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   close(mensaje: string = '', estado: number = 0){
     this.dialogRef.close({mensaje: mensaje, estado: estado});
   }
+
   cambiarPassword(newPassword: string){
     if(this.passwordControl.status == 'VALID'){
       this.usuarioService.cambiarPasswordAdmin(newPassword, this.usuario.codigo).subscribe({
@@ -32,5 +38,4 @@ export class AdminPasswordDialogComponent implements OnInit {
       });
     }
   }
-
 }

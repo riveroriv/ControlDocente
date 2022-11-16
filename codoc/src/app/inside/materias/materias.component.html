@@ -10,7 +10,8 @@
     <input type="text"
             placeholder="Nombre o código"
             matInput
-            (keyup)="filtro($event)">
+            (keyup)="filtro($event)"
+            autocomplete="off">
   </mat-form-field>
         
   <button  mat-button color="primary" aria-label="Añadir materia" (click)="nuevaMateria()">

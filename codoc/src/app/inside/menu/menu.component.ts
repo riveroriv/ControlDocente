@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { isEmpty, map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { Router } from '@angular/router';
@@ -15,10 +15,33 @@ import { PerfilDialogComponent } from '../dialogs/perfil-dialog/perfil-dialog.co
   styleUrls: ['./menu.component.css']
 })
 
-export class MenuComponent {
+export class MenuComponent implements OnInit{
   seccion: string = 'Home';
   usuario: string = '';
   isAdmin: boolean = false;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver, 
+    private route: ActivatedRoute, 
+    public authService: AuthService, 
+    public router: Router,
+    public dialog: MatDialog
+    ) { }
+
+  ngOnInit(): void {
+    if(!this.authService.hasToken()){
+      this.authService.redirigirOutside();
+    }else{
+      this.cargarPerfil();
+      this.authService.isAdmin().subscribe({
+        next: (u) => {
+          this.isAdmin = true;
+          this.authService.setTipo('1');
+        },
+        error: (e) => this.authService.setTipo('0')
+      });
+    }
+  }
 
   setSeccion(sesccion:string){
     this.seccion=sesccion;
@@ -29,35 +52,16 @@ export class MenuComponent {
       map(result => result.matches),
       shareReplay()
     );
-
-  constructor(
-    private breakpointObserver: BreakpointObserver, 
-    private route: ActivatedRoute, 
-    public authService: AuthService, 
-    public router: Router,
-    public dialog: MatDialog
-    ) {
-    if(!this.authService.hasToken()){
-      this.authService.redirigirOutside();
-    }
-    this.authService.usuario().subscribe({
-      next: (u) => {
-        let usuario: any = u;
-        this.usuario = usuario.nombre.charAt(0);
-      },
-      error: (e) => this.authService.redirigirOutside()
-    });
-    this.authService.isAdmin().subscribe({
-      next: (u) => {
-        this.isAdmin = true;
-        this.authService.setTipo('1');
-      },
-      error: (e) => this.authService.setTipo('0')
-    });
-  }
   
   logout(){
-    this.authService.logout().subscribe();
+    this.authService.logout().subscribe({
+      next: (r) => this.salirYBorrarCookies(),
+      error: (e)=> this.salirYBorrarCookies()
+    });
+    
+  }
+
+  salirYBorrarCookies(){
     this.authService.deleteToken();
     this.authService.redirigirOutside();
     this.authService.deleteCookies();
@@ -65,17 +69,21 @@ export class MenuComponent {
 
   changePassword(){
     const dialogRef = this.dialog.open(PasswordDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.afterClosed().subscribe(() => { });
   }
 
   openPerfil(){
-    const dialogRef = this.dialog.open(PerfilDialogComponent);
+    const dialogRef = this.dialog.open(PerfilDialogComponent, { minWidth: '30%' });
+    dialogRef.afterClosed().subscribe(() => this.cargarPerfil());
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  cargarPerfil(){
+    this.authService.usuario().subscribe({
+      next: (u) => {
+        let usuario: any = u;
+        this.usuario = usuario.nombre.charAt(0);
+      },
+      error: (e) => this.authService.redirigirOutside()
     });
   }
 }

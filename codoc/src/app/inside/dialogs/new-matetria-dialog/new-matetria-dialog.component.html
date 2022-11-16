@@ -18,7 +18,7 @@
 				<mat-form-field appearance="fill" class="input">
 					<mat-label>Ciudad</mat-label>
 					<mat-select #ciudadMateria>
-						<mat-option *ngFor="let ciudad of ciudades" value="{{ciudad.id}}" (click)="ciudadAction(ciudad)">{{ciudad.nombre}}</mat-option>
+						<mat-option *ngFor="let ciudad of ciudades" value="{{ciudad.id}}" (onSelectionChange)="ciudadAction(ciudad)">{{ciudad.nombre}}</mat-option>
 					</mat-select>
 				</mat-form-field>
 			</div>
@@ -42,7 +42,8 @@
 				<input type="text"
 						placeholder="Nombre o código"
 						matInput
-						(keyup)="filtro($event)">
+						(keyup)="filtro($event)"
+						autocomplete="off">
 			</mat-form-field>
 
 			<mat-table [dataSource]="dataSource" matSort>

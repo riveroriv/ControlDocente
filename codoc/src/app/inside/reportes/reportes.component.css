@@ -16,10 +16,10 @@
 .mat-column-nombre{
     flex-grow: 2;
 }
-.docente{
+.docente, .materia{
     transition: all 0.4s;
 }
-.docente:hover{
+.docente:hover, .materia:hover{
     background-color: rgb(221, 221, 221);
 }
 .mat-column-materias{
@@ -28,6 +28,12 @@
 }
 .mat-column-falta{
     border-right: 1px solid #555;
+}
+.cumplido_materia_icon{
+    color: rgb(17, 129, 17);
+}
+.faltante_materia_icon{
+    color: rgba(122, 21, 21, 0.405);
 }
 .mat-column-silabo,
 .mat-column-parcial_1,

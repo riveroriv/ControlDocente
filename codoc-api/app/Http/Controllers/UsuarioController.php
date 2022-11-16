@@ -90,6 +90,7 @@ class UsuarioController extends Controller
             ], 400);
         }
         $usuario = Usuario::where('codigo', $codigo['codigo'])->first();
+        $usuario->tokens()->delete();
         $usuario->delete();
 
         return response()->json([

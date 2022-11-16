@@ -29,21 +29,28 @@ export interface Materia {
 
 export class ConsultaComponent implements OnInit {
 
-  displayedColumns: string[] = ['codigo', 'nombre', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla', 'ciudad'];
+  displayedColumns: string[] = [
+    'codigo', 'nombre', 'silabo',
+    'parcial_1', 'parcial_2', 'parcial_3',
+    'nota_1', 'nota_2', 'nota_3',
+    'planilla', 'ciudad'
+  ];
   dataSource!: MatTableDataSource<Materia>;
   materiasDocente:any = [];
   numeroMaterias = 0;
   cumplidos = [0,0,0,0,0,0,0,0];
+  mensaje = '';
+  codigo = 0;
+  display = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  mensaje = '';
-  codigo = 0;
-  display = '';
-
-  constructor(private materias:MateriaService, private route: ActivatedRoute, public router: Router) {
+  constructor(
+    private materias:MateriaService,
+    private route: ActivatedRoute,
+    public router: Router) {
     this.codigo = Number(route.snapshot.params['codigo']);
   }
 
@@ -78,7 +85,7 @@ export class ConsultaComponent implements OnInit {
           this.display = 'no-display';
         }
         this.dataSource = new MatTableDataSource<Materia>(arrayMaterias);
-        
+
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
@@ -97,7 +104,7 @@ export class ConsultaComponent implements OnInit {
   volver(){
     this.router.navigateByUrl('docente');
   }
-  
+
   filtro(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -123,6 +130,7 @@ export class ConsultaComponent implements OnInit {
       },
     }
   };
+
   public barChartType: ChartType = 'bar';
 
   public barChartData: ChartData<'bar'> = {

@@ -16,7 +16,11 @@ export class LoginComponent implements OnInit {
   passwordControl = new FormControl('', [Validators.required]);
   duracionSnackBar = 4;
 
-  constructor(public authService: AuthService, public router: Router, private _snackBar: MatSnackBar) { }
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    private _snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +42,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
   snackBar(message: string){
     this._snackBar.open(message, 'Cerrar', {
       duration: this.duracionSnackBar * 1000,

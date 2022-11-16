@@ -23,28 +23,35 @@ export interface Docente {
   templateUrl: './materia-dialog.component.html',
   styleUrls: ['./materia-dialog.component.css']
 })
+
 export class MateriaDialogComponent implements OnInit {
+
   displayedColumns = ['codigo', 'nombre'];
   dataSource!: MatTableDataSource<Docente>;
-
   docente: Docente = {codigo:0, nombre:''};
   ciudad: Ciudad = {id:0, nombre: ''};
   codigo: string = '';
   nombre: string = '';
-
   ciudades: Ciudad[] = Array({id: 1, nombre: 'Cochabamba'}, {id: 2, nombre: 'La Paz'}, {id: 3, nombre: 'Santa Cruz'});
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public materia: Materia, public materiaService: MateriaService, public ciudadService: CiudadService, public docenteService: DocenteService, private dialogRef: MatDialogRef<MateriaDialogComponent>) {
-    this.docente = {codigo: materia.id_docente, nombre: materia.docente};
-    this.ciudad = {id: materia.id_ciudad, nombre: materia.ciudad};
-    this.codigo = materia.codigo;
-    this.nombre = materia.nombre;
-  }
+  constructor(
+    private _formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public materia: Materia,
+    public materiaService: MateriaService,
+    public ciudadService: CiudadService,
+    public docenteService: DocenteService,
+    private dialogRef: MatDialogRef<MateriaDialogComponent>
+    ) { }
 
   ngOnInit(): void {
+    this.docente = {codigo: this.materia.id_docente, nombre: this.materia.docente};
+    this.ciudad = {id: this.materia.id_ciudad, nombre: this.materia.ciudad};
+    this.codigo = this.materia.codigo;
+    this.nombre = this.materia.nombre;
+
     this.ciudadService.getCiudades().subscribe({
       next: (data) => {
         let c: any = data;

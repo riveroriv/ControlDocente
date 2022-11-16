@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -8,7 +8,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
   templateUrl: './new-usuario-dialog.component.html',
   styleUrls: ['./new-usuario-dialog.component.css']
 })
-export class NewUsuarioDialogComponent implements OnInit {
+export class NewUsuarioDialogComponent {
 
   codigoControl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{4,}')]);
   emailControl = new FormControl('', [Validators.required, Validators.email]);
@@ -19,11 +19,10 @@ export class NewUsuarioDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<NewUsuarioDialogComponent>
     ) { }
 
-  ngOnInit(): void {
-  }
   close(mensaje: string = '', estado: number = 0){
     this.dialogRef.close({mensaje: mensaje, estado: estado});
   }
+
   nuevoUsuario(codigo: string, nombre: string, email: string){
     if(this.codigoControl.status == 'VALID'){
       if(this.nombreControl.status == 'VALID'){

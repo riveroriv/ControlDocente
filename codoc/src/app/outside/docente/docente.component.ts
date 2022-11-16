@@ -12,10 +12,14 @@ import { DocenteService } from 'src/app/servicios/docente.service';
 export class DocenteComponent implements OnInit {
 
   hide = true;
-  codigoControl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{4,}')]);
   duracionSnackBar: number = 3;
+  codigoControl = new FormControl('', [Validators.required, Validators.pattern('[0-9]{4,}')]);
 
-  constructor(private docenteServicio: DocenteService, public router: Router, private _snackBar: MatSnackBar) { }
+  constructor(
+    private docenteServicio: DocenteService,
+    public router: Router,
+    private _snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
   }
@@ -40,5 +44,4 @@ export class DocenteComponent implements OnInit {
       duration: this.duracionSnackBar * 1000,
     });
   }
-
 }

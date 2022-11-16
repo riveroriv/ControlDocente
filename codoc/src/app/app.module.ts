@@ -12,7 +12,6 @@ import { DocenteComponent } from './outside/docente/docente.component';
 import { ErrorComponent } from './error/error.component';
 import { ConsultaComponent } from './outside/consulta/consulta.component';
 import { InfoComponent } from './inside/info/info.component';
-
 import { NavexteriorComponent } from './outside/navexterior/navexterior.component';
 import { MateriasComponent } from './inside/materias/materias.component';
 import { DocentesComponent } from './inside/docentes/docentes.component';
@@ -39,7 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
@@ -147,5 +146,4 @@ export class Globales {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  httl:string = 'hola';
 }

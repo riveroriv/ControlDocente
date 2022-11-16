@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { AuthService } from 'src/app/servicios/auth.service';
 import { MateriaService } from 'src/app/servicios/materias.service';
 
 export interface DocenteReporte {
@@ -44,16 +43,23 @@ export interface MateriaReporte {
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.css']
 })
+
 export class ReportesComponent implements OnInit {
 
-  displayedColumns: string[] = ['codigo', 'nombre', 'materias', 'cumple', 'falta', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla'];
+  displayedColumns: string[] = [
+    'codigo', 'nombre', 'materias',
+    'cumple', 'falta',
+    'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla'
+  ];
   dataSource!: MatTableDataSource<DocenteReporte>;
 
-  displayedColumnsMaterias: string[] = ['codigo', 'nombre', 'cumplimiento', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla'];
+  displayedColumnsMaterias: string[] = [
+    'codigo', 'nombre', 'cumplimiento',
+    'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla'
+  ];
   dataSourceMaterias!: MatTableDataSource<MateriaReporte>;
 
   general = [0, 0,0,0, 0,0,0, 0];
-  isAdmin = false;
   
   @ViewChild('paginatorDocentes') paginator!: MatPaginator;
   @ViewChild('docenteSort') sort!: MatSort;
@@ -65,16 +71,14 @@ export class ReportesComponent implements OnInit {
 
   constructor(
     public materiaService: MateriaService,
-    public authService: AuthService,
     private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.cargarReporteDocentes();
     this.cargarReporteMaterias();
-    this.isAdmin = this.authService.getTipo() == "1";
   }
-  
+
   cargarReporteDocentes(){
     this.materiaService.getDocentesReport().subscribe({
       next: (data) => {
@@ -110,7 +114,6 @@ export class ReportesComponent implements OnInit {
         this.dataSource = new MatTableDataSource<DocenteReporte>(docentesReporte.slice());
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-
 
         this.paginator._intl.firstPageLabel = 'Primera';
         this.paginator._intl.itemsPerPageLabel = 'Docentes por página';

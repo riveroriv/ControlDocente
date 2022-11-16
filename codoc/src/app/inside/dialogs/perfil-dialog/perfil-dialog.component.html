@@ -9,19 +9,32 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Nombre</mat-label>
-    <input matInput value="{{nombre}}" #nombrei>
+    <input matInput #nombrei [formControl]="nombreControl">
+    <mat-error *ngIf="nombreControl.hasError('pattern') && !nombreControl.hasError('required')">
+      Formato de nombre no válido
+    </mat-error>
+    <mat-error *ngIf="nombreControl.hasError('required')">
+        El nombre es <strong>necesario</strong>
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Correo electrónico</mat-label>
-    <input matInput value="{{correo}}" #correoi>
+    <input matInput #correoi [formControl]="emailControl">
+      <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+          Email no válido
+      </mat-error>
+      <mat-error *ngIf="emailControl.hasError('required')">
+          El nombre es <strong>necesario</strong>
+      </mat-error>
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button color="warn" mat-dialog-close>Cerrar todas las sesiones</button>
+  <button mat-button color="warn" mat-dialog-close (click)="logoutAll()">Cerrar todas las sesiones</button>
 </mat-dialog-actions>
 <mat-dialog-actions>
     <button mat-flat-button mat-dialog-close>Cancelar</button>
+    <span class="spacer"></span>
     <button mat-flat-button color="primary" cdkFocusInitia (click)="actualizar(nombrei.value, correoi.value)" >Guardar</button>
   </mat-dialog-actions>

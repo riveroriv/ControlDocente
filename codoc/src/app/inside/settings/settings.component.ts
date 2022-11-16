@@ -35,6 +35,7 @@ export class SettingsComponent implements OnInit {
       this.cargarCiudades();
     }
   }
+
   cargarCiudades(){
     this.ciudadService.getCiudades().subscribe({
       next: (data) => {
@@ -43,6 +44,7 @@ export class SettingsComponent implements OnInit {
       }
     });
   }
+
   actualizar(id: number, nuevoNombre: string){
     this.ciudadService.actualizarCiudad(id, nuevoNombre).subscribe({
       next: (r) => {
@@ -52,6 +54,7 @@ export class SettingsComponent implements OnInit {
       error: (r) => this.snackBar('No se pudo guardar cambio')
     });    
   }
+
   nuevaCiudad(nuevoNombre: string){
     this.ciudadService.crearCiudad(nuevoNombre).subscribe({
       next: (r) => {
@@ -61,6 +64,7 @@ export class SettingsComponent implements OnInit {
       error: (r) => this.snackBar('No se pudo crear')
     });    
   }
+
   snackBar(message: string){
     this._snackBar.open(message, 'Cerrar', {
       duration: 5 * 1000,

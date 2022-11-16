@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DocenteService } from 'src/app/servicios/docente.service';
 
@@ -7,15 +7,18 @@ import { DocenteService } from 'src/app/servicios/docente.service';
   templateUrl: './new-docente-dialog.component.html',
   styleUrls: ['./new-docente-dialog.component.css']
 })
-export class NewDocenteDialogComponent implements OnInit {
 
-  constructor(public docenteService: DocenteService, private dialogRef: MatDialogRef<NewDocenteDialogComponent>) { }
+export class NewDocenteDialogComponent{
 
-  ngOnInit(): void {
-  }
+  constructor(
+    public docenteService: DocenteService,
+    private dialogRef: MatDialogRef<NewDocenteDialogComponent>
+    ) { }
+
   close(mensaje: string = '', estado: number = 0){
     this.dialogRef.close({mensaje: mensaje, estado: estado});
   }
+
   nuevoDocente(nombre: string, codigo: string){
     if(!Number.isInteger(Number(codigo))){
       this.close('Código no válido', 3);

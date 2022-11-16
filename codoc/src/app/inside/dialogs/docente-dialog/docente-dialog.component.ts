@@ -9,6 +9,7 @@ import { Docente } from '../materia-dialog/materia-dialog.component';
   templateUrl: './docente-dialog.component.html',
   styleUrls: ['./docente-dialog.component.css']
 })
+
 export class DocenteDialogComponent implements OnInit{
 
   isAdmin = false;
@@ -27,6 +28,7 @@ export class DocenteDialogComponent implements OnInit{
   close(mensaje: string = '', estado: number = 0){
     this.dialogRef.close({mensaje: mensaje, estado: estado});
   }
+
   actualizarDocente(nombre: string){
     if(nombre.length < 5){
       this.close('Nombre muy corto', 3);

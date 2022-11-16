@@ -22,24 +22,31 @@ export interface Docente {
   templateUrl: './new-matetria-dialog.component.html',
   styleUrls: ['./new-matetria-dialog.component.css']
 })
+
 export class NewMatetriaDialogComponent implements OnInit {
   
   displayedColumns = ['codigo', 'nombre'];
   dataSource!: MatTableDataSource<Docente>;
-
   docente: Docente = {codigo:0, nombre:''};
   ciudad: Ciudad = {id:0, nombre: ''};
   codigo: string = '';
   nombre: string = '';
 
-  ciudades: Ciudad[] = Array({id: 1, nombre: 'Cochabamba'}, {id: 2, nombre: 'La Paz'}, {id: 3, nombre: 'Santa Cruz'});
+  ciudades: Ciudad[] = Array(
+    {id: 1, nombre: 'Cochabamba'},
+    {id: 2, nombre: 'La Paz'},
+    {id: 3, nombre: 'Santa Cruz'}
+    );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(public ciudadService: CiudadService, public materiaService: MateriaService, public docenteService: DocenteService, private dialogRef: MatDialogRef<NewMatetriaDialogComponent>) {
-    
-  }
+  constructor(
+    public ciudadService: CiudadService,
+    public materiaService: MateriaService,
+    public docenteService: DocenteService,
+    private dialogRef: MatDialogRef<NewMatetriaDialogComponent>
+    ) { }
 
   ngOnInit(): void {
     this.ciudadService.getCiudades().subscribe({
@@ -64,6 +71,7 @@ export class NewMatetriaDialogComponent implements OnInit {
       }
     });
   }
+
   filtro(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -79,9 +87,9 @@ export class NewMatetriaDialogComponent implements OnInit {
   }
   codigoAction(codigo: string){
     this.codigo = codigo.toUpperCase();
-
   }
   ciudadAction(ciudad: Ciudad){
+    console.warn(ciudad);
     this.ciudad = ciudad;
   }
   crearMateria(){
@@ -101,6 +109,5 @@ export class NewMatetriaDialogComponent implements OnInit {
   }
   close(mensaje: string = '', estado: number = 0){
     this.dialogRef.close({mensaje: mensaje, estado: estado});
-  }
-  
+  } 
 }

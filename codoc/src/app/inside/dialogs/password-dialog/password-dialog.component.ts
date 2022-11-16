@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -9,18 +10,21 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
   templateUrl: './password-dialog.component.html',
   styleUrls: ['./password-dialog.component.css']
 })
-export class PasswordDialogComponent implements OnInit {
+
+export class PasswordDialogComponent {
   hide = true;
   duracionSnackBar = 5;
   passwordControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(8),
+    Validators.required, 
+    Validators.pattern(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/)
   ]);
 
-  constructor(private _snackBar: MatSnackBar, public usuarioService: UsuarioService, public authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(
+    private _snackBar: MatSnackBar,
+    public usuarioService: UsuarioService,
+    public authService: AuthService,
+    private dialogRef: MatDialogRef<PasswordDialogComponent>,
+    ) { }
 
   cambiar(password: string) {
     if(this.passwordControl.status == 'VALID'){
@@ -30,15 +34,21 @@ export class PasswordDialogComponent implements OnInit {
           this.authService.logoutAll().subscribe();
           this.authService.redirigirOutside();
         },
-        error: (e) => this.snackBar('No se pudo cambiar la contraseña')
+        error: (e) => {
+          this.snackBar('No se pudo cambiar la contraseña');
+          this.close();
+        }
       });
-    }else{
-      this.snackBar('Contraseña no válida');
     }
   }
+
   snackBar(message: string){
     this._snackBar.open(message, 'Cerrar', {
       duration: this.duracionSnackBar * 1000,
     });
+  }
+  
+  close(){
+    this.dialogRef.close();
   }
 }

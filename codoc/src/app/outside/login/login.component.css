@@ -18,3 +18,13 @@
     background-size: 75%;
     background-position: center;
 }
+@media (max-width: 900px) {
+    .contenedor{
+        background-size: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .contenedor{
+        background-size: 120%;
+    }
+}

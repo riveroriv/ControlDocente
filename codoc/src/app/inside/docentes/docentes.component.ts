@@ -18,6 +18,7 @@ export interface Docente {
   templateUrl: './docentes.component.html',
   styleUrls: ['./docentes.component.css']
 })
+
 export class DocentesComponent implements OnInit {
   
   displayedColumns: string[] = ['codigo', 'nombre'];
@@ -44,12 +45,13 @@ export class DocentesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   cargarDocentes(){
     this.docenteService.getDocentes().subscribe({
       next: (data) => {
         let docentesData: any = data;
         let arrayDocentes: Docente[] = docentesData;
-        
+
         this.dataSource = new MatTableDataSource<Docente>(arrayDocentes.slice());
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -62,9 +64,9 @@ export class DocentesComponent implements OnInit {
       }
     });
   }
+
   nuevoDocente(){
     const nuevaMateria = this.dialog.open(NewDocenteDialogComponent);
-
     nuevaMateria.afterClosed().subscribe(result => {
       try {
         if(result.estado != 0){
@@ -76,9 +78,9 @@ export class DocentesComponent implements OnInit {
       } catch (error) {}
     });
   }
+
   editarDocente(docente: Docente){
     const editarMateria = this.dialog.open(DocenteDialogComponent, { data: docente });
-
     editarMateria.afterClosed().subscribe(result => {
       try {
         if(result.estado != 0){
@@ -90,6 +92,7 @@ export class DocentesComponent implements OnInit {
       } catch (error) {}
     });
   }
+
   snackBar(message: string){
     this._snackBar.open(message, 'Cerrar', {
       duration: this.duracionSnackBar * 1000,

@@ -13,7 +13,17 @@
     align-items: center;
     justify-content: space-around;
     background-color: #673AB7;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../assets/CODOC-O.svg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../assets/CODOC.svg');
     background-size: 75%;
     background-position: center;
+}
+@media (max-width: 900px) {
+    .contenedor{
+        background-size: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .contenedor{
+        background-size: 120%;
+    }
 }

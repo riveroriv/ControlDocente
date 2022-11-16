@@ -22,6 +22,7 @@ export interface Usuario {
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
+
 export class UsuariosComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'nombre', 'correo', 'tipo', 'opciones'];
   dataSource!: MatTableDataSource<Usuario>;//cambia esto
@@ -45,11 +46,13 @@ export class UsuariosComponent implements OnInit {
       this.cargarUsuarios();
     }
   }
+
   snackBar(message: string){
     this._snackBar.open(message, 'Cerrar', {
       duration: 5 * 1000,
     });
   }
+
   filtro(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -57,6 +60,7 @@ export class UsuariosComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   cambiarTipo(codigo: number, tipo: number){
     tipo = tipo > 0 ? 0 : 1;
     this.usuarioService.cambiarTipo(codigo, tipo).subscribe({
@@ -67,6 +71,7 @@ export class UsuariosComponent implements OnInit {
       error: (e) => this.snackBar(e.error.message)
     });
   }
+
   eliminar(usuario: Usuario){
     this.usuarioService.eliminar(usuario.codigo).subscribe({
       next: (v) => {
@@ -77,9 +82,9 @@ export class UsuariosComponent implements OnInit {
       error: (e) => this.snackBar(e.error.message)
     });
   }
+
   nuevoUsuario(){
     const nuevoUsuario = this.dialog.open(NewUsuarioDialogComponent);
-
     nuevoUsuario.afterClosed().subscribe(result => {
       try {
         if(result.estado != 0){
@@ -91,9 +96,9 @@ export class UsuariosComponent implements OnInit {
       } catch (error) {}
     });
   }
+
   cambiarPassword(usuario: Usuario){
     const cambiarPassword = this.dialog.open(AdminPasswordDialogComponent, {data: usuario});
-
     cambiarPassword.afterClosed().subscribe(result => {
       try {
         if(result.estado != 0){
@@ -105,12 +110,13 @@ export class UsuariosComponent implements OnInit {
       } catch (error) {}
     });
   }
+
   cargarUsuarios(){
     this.usuarioService.listar().subscribe({
       next: (data) => {
         let usuariosData: any = data;
         let arrayUsuarios: Usuario[] = usuariosData;
-        
+
         this.dataSource = new MatTableDataSource<Usuario>(arrayUsuarios.slice());
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

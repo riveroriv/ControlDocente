@@ -90,76 +90,104 @@
     </mat-tab>
     <mat-tab label="Materias">
     
-        <div class="docentes mat-elevation-z8">
+        <div class="materias mat-elevation-z8">
             <mat-table [dataSource]="dataSourceMaterias" matSort #materiaSort="matSort">
                 <ng-container matColumnDef="codigo">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
+                <mat-cell mat-cell *matCellDef="let materia" data-label="código"> {{materia.codigo}} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="nombre">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Docente</mat-header-cell>
-                <mat-cell *matCellDef="let docente" data-label="nombre" class="nombre"> {{docente.nombre}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Materia</mat-header-cell>
+                <mat-cell *matCellDef="let materia" data-label="nombre" class="nombre"> {{materia.nombre}} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="silabo">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Sílabo</mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente" data-label="sílabo">{{docente.silabo}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia" data-label="sílabo">
+                        <mat-icon class="{{materia.silabo==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                            {{materia.silabo==0?'close':'check'}}
+                        </mat-icon>
+                    </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="parcial_1">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>P1</mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente"  data-label="primer parcial">{{docente.parcial_1}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia"  data-label="primer parcial">
+                        <mat-icon class="{{materia.parcial_1==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                            {{materia.parcial_1==0?'close':'check'}}
+                        </mat-icon>
+                    </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="parcial_2">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>P2</mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente" data-label="segundo parcial">{{docente.parcial_2}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia" data-label="segundo parcial">
+                        <mat-icon class="{{materia.parcial_2==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                            {{materia.parcial_2==0?'close':'check'}}
+                        </mat-icon>
+                    </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="parcial_3">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>P3</mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente" data-label="parcial final">{{docente.parcial_3}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia" data-label="parcial final">
+                        <mat-icon class="{{materia.parcial_3==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                            {{materia.parcial_3==0?'close':'check'}}
+                        </mat-icon>
+                    </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="nota_1">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>N1</mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente" data-label="nota 1p">{{docente.nota_1}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia" data-label="nota 1p">
+                        <mat-icon class="{{materia.nota_1==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                            {{materia.nota_1==0?'close':'check'}}
+                        </mat-icon>
+                    </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="nota_2">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>N2</mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente" data-label="nota 2p">{{docente.nota_2}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia" data-label="nota 2p">
+                        <mat-icon class="{{materia.nota_2==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                            {{materia.nota_2==0?'close':'check'}}
+                        </mat-icon>
+                    </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="nota_3">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>N3</mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let docente"  data-label="nota pf">{{docente.nota_3}}</mat-cell>
+                <mat-cell mat-cell *matCellDef="let materia"  data-label="nota pf">
+                    <mat-icon class="{{materia.nota_3==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                        {{materia.nota_3==0?'close':'check'}}
+                    </mat-icon>
+                </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="planilla">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Planilla</mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let docente"  data-label="planilla">{{docente.planilla}}</mat-cell>
+                <mat-cell mat-cell *matCellDef="let materia"  data-label="planilla">
+                    <mat-icon class="{{materia.planilla==0?'faltante_materia_icon':'cumplido_materia_icon'}}">
+                        {{materia.planilla==0?'close':'check'}}
+                    </mat-icon>
+                </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="materias">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Materias </mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.materias}} </mat-cell>
+                <mat-cell mat-cell *matCellDef="let materia" data-label="materia">{{materia.materias}} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="cumplimiento">
                     <mat-header-cell *matHeaderCellDef mat-sort-header><mat-icon class="cumple-boton" matTooltip="completados">check_circle_outline</mat-icon></mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.cumplimiento/8 | percent}}</mat-cell>
+                    <mat-cell mat-cell *matCellDef="let materia" data-label="materia">{{materia.cumplimiento/8 | percent}}</mat-cell>
                 </ng-container>
     
                 <mat-header-row *matHeaderRowDef="displayedColumnsMaterias"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumnsMaterias;" class="docente"></mat-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsMaterias;" class="materia"></mat-row>
             </mat-table>
             <mat-paginator  #paginatorMaterias="matPaginator" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons aria-label="Seleccione el número de materias"></mat-paginator>
         </div>
-        
-    </mat-tab>
-    <mat-tab label="Usuarios" *ngIf="isAdmin">
-        
     </mat-tab>
 </mat-tab-group>

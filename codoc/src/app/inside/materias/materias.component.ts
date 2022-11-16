@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MateriaService } from '../../servicios/materias.service';
 import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import { MateriaDialogComponent } from '../dialogs/materia-dialog/materia-dialog.component';
 import {MatPaginator} from '@angular/material/paginator';
 import { NewMatetriaDialogComponent } from '../dialogs/new-matetria-dialog/new-matetria-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocalStorageService } from 'src/app/servicios/local-storage.service';
 
 
 export interface Materia {
@@ -34,23 +35,29 @@ export interface Materia {
 
 export class MateriasComponent implements OnInit {
 
-  displayedColumns: string[] = ['codigo', 'nombre', 'silabo', 'parcial_1', 'parcial_2', 'parcial_3', 'nota_1', 'nota_2', 'nota_3', 'planilla', 'docente', 'ciudad', 'editar'];
-  dataSource!: MatTableDataSource<Materia>;
+  displayedColumns: string[] = [
+    'codigo', 'nombre', 'silabo',
+    'parcial_1', 'parcial_2', 'parcial_3',
+    'nota_1', 'nota_2', 'nota_3',
+    'planilla', 'docente', 'ciudad', 'editar'
+  ];
+  dataSource: MatTableDataSource<Materia> = new MatTableDataSource();
   materiasDocente:any = [];
   duracionSnackBar = 5;
 
-
+  @ViewChild(MatTable) table!: MatTable<Materia>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
   constructor(
-    public materias:MateriaService,
+    public materias: MateriaService,
+    public storageService: LocalStorageService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar
-    ) {
-  }
+    ) { }
 
   ngOnInit(): void {
+    this.dataSource.data = this.storageService.get('materias');
     this.cargarMaterias();
   }
 
@@ -91,6 +98,7 @@ export class MateriasComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   cargarMaterias(){
     this.materias.getMateriasUsuario().subscribe(data=>{
       this.materiasDocente = data;
@@ -114,7 +122,9 @@ export class MateriasComponent implements OnInit {
         };
         arrayMaterias.push(m);
       }
-      this.dataSource = new MatTableDataSource<Materia>(arrayMaterias.slice());
+      this.storageService.set('materias', arrayMaterias.slice());
+      this.dataSource.data =arrayMaterias.slice();
+
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
@@ -125,11 +135,13 @@ export class MateriasComponent implements OnInit {
       this.paginator._intl.previousPageLabel = 'Previa';
     });
   }
+
   snackBar(message: string){
     this._snackBar.open(message, 'Cerrar', {
       duration: this.duracionSnackBar * 1000,
     });
   }
+
   cambiar(materia: Materia, campo: number, valorAntiguo: number){
     let valor:number = valorAntiguo == 0? 1: 0;
     this.materias.actualizarCampoMateria(materia.codigo, campo , valor).subscribe({
@@ -137,6 +149,7 @@ export class MateriasComponent implements OnInit {
       error: (e) => this.snackBar('Ha ocurrido un error')
     });
   }
+
   setValueMateria(materia: Materia, value: number, campo: number){
     switch(campo){
       case 0: materia.silabo = value;
@@ -158,6 +171,6 @@ export class MateriasComponent implements OnInit {
       default:
       break;
     }
+    this.storageService.set('materias', this.dataSource.data.slice(0,20));
   }
 }
-
