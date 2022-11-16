@@ -2,20 +2,28 @@
 
 <mat-dialog-content class="mat-typography contenido">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Código</mat-label>
-        <input type="number" matInput #codigoDocente>
-    </mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Código</mat-label>
+		<input type="number" matInput #codigoDocente autocomplete="off">
+	</mat-form-field>
 
-    <mat-form-field appearance="fill">
-    <mat-label>Nombre</mat-label>
-    <input matInput #nombreDocente>
-    </mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Nombre</mat-label>
+		<input matInput #nombreDocente autocomplete="off">
+	</mat-form-field>
 
 </mat-dialog-content>
 
 <mat-dialog-actions class="botones">
-    <button mat-flat-button (click)="close()">Cancelar</button>
-    <span class="spacer"></span>
-    <button mat-flat-button color="primary" cdkFocusInitia (click)="nuevoDocente(nombreDocente.value, codigoDocente.value)">Guardar</button>
+	<button mat-flat-button
+			(click)="close()">
+		Cancelar
+	</button>
+	<span class="spacer"></span>
+	<button mat-flat-button 
+			color="primary" 
+			cdkFocusInitia
+			(click)="nuevoDocente(nombreDocente.value, codigoDocente.value)">
+			Guardar
+	</button>
 </mat-dialog-actions>

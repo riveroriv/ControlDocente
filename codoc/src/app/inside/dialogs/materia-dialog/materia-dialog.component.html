@@ -2,54 +2,76 @@
 
 <mat-dialog-content class="mat-typography contenido">
 
-  <mat-form-field appearance="fill">
-    <mat-label>Nombre Materia</mat-label>
-    <input matInput value="{{nombre}}" #nombreMateria (keyup)="nombreAction(nombreMateria.value)">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Ciudad</mat-label>
-    <mat-select value="{{ciudad.id}}">
-      <mat-option *ngFor="let ciudad of ciudades" value="{{ciudad.id}}" #ciudadMateria (click)="ciudadAction(ciudad)">{{ciudad.nombre}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Nombre Materia</mat-label>
+		<input matInput
+				value="{{nombre}}"
+				#nombreMateria
+				(keyup)="nombreAction(nombreMateria.value)"
+				autocomplete="off">
+	</mat-form-field>
 
-  <div class="docente" *ngIf="docente.codigo > 0">
-    <b>Docente : </b>
-    <span>{{docente.codigo}} - {{docente.nombre}}</span>
-  </div>
+	<mat-form-field appearance="fill">
+		<mat-label>Ciudad</mat-label>
+		<mat-select value="{{ciudad.id}}">
+			<mat-option 
+					*ngFor="let ciudad of ciudades"
+					value="{{ciudad.id}}"
+					(onSelectionChange)="ciudadAction(ciudad)">
+					{{ciudad.nombre}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
 
-  <mat-form-field class="buscar">
-    <mat-label>Buscar docente</mat-label>
-    <mat-icon matPrefix>search</mat-icon>
-    <input type="text"
-        placeholder="Nombre o código"
-        matInput
-        (keyup)="filtro($event)"
-        autocomplete="off">
-  </mat-form-field>
+	<div class="docente" *ngIf="docente.codigo > 0">
+		<b>Docente : </b>
+		<span>{{docente.codigo}} - {{docente.nombre}}</span>
+	</div>
 
-  <mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="codigo">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
-    </ng-container>
+	<mat-form-field class="buscar">
+		<mat-label>Buscar docente</mat-label>
+		<mat-icon matPrefix>search</mat-icon>
+		<input type="text"
+				placeholder="Nombre o código"
+				matInput
+				(keyup)="filtro($event)"
+				autocomplete="off">
+	</mat-form-field>
 
-    <ng-container matColumnDef="nombre">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Docente</mat-header-cell>
-      <mat-cell mat-cell *matCellDef="let docente" data-label="docente">{{docente.nombre}}</mat-cell>
-    </ng-container>
+	<mat-table [dataSource]="dataSource" matSort>
+		<ng-container matColumnDef="codigo">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+			<mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
+		</ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="fila" (click)="elegirDocente(row)"></mat-row>
-  </mat-table>
-  <mat-paginator [pageSizeOptions]="[5]"  aria-label="Seleccione el número de materias"></mat-paginator>
+		<ng-container matColumnDef="nombre">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Docente</mat-header-cell>
+			<mat-cell *matCellDef="let docente" data-label="docente">{{docente.nombre}}</mat-cell>
+		</ng-container>
 
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;" class="fila" (click)="elegirDocente(row)"></mat-row>
+	</mat-table>
+
+	<mat-paginator [pageSizeOptions]="[5]" aria-label="Seleccione el número de materias"></mat-paginator>
 
 </mat-dialog-content>
 
 <mat-dialog-actions class="botones">
-  <button mat-flat-button color="warn" (click)="eliminarMateria()">Eliminar</button>
-  <span class="spacer"></span>
-  <button mat-flat-button (click)="close()">Cancelar</button>
-  <button mat-flat-button color="primary" cdkFocusInitia (click)="actualizarMateria()">Guardar</button>
+	<button mat-flat-button
+			color="warn"
+			(click)="eliminarMateria()">
+		Eliminar
+	</button>
+	<span class="spacer"></span>
+	<button mat-flat-button
+			(click)="close()">
+		Cancelar
+	</button>
+	<button mat-flat-button
+			color="primary"
+			cdkFocusInitia
+			(click)="actualizarMateria()">
+		Guardar
+	</button>
 </mat-dialog-actions>

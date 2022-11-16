@@ -1,40 +1,41 @@
 <mat-toolbar class="segunda-fila">
-    <span>Docentes</span>
+	<span>Docentes</span>
 </mat-toolbar>
 
 <div class="opciones">
-  <mat-form-field class="buscar">
-    <mat-label>Buscar docente</mat-label>
-    <mat-icon matPrefix>search</mat-icon>
-    <input type="text"
-            placeholder="Nombre o código"
-            matInput
-            (keyup)="filtro($event)"
-            autocomplete="off">
-  </mat-form-field>
-        
-  <button  mat-button color="primary" aria-label="Añadir docente" (click)="nuevoDocente()">
-    <mat-icon>add</mat-icon>Añadir docente
-  </button>
+	<mat-form-field class="buscar">
+		<mat-label>Buscar docente</mat-label>
+		<mat-icon matPrefix>search</mat-icon>
+		<input type="text"
+				placeholder="Nombre o código"
+				matInput
+				(keyup)="filtro($event)"
+				autocomplete="off">
+	</mat-form-field>
+				
+	<button mat-button color="primary" aria-label="Añadir docente" (click)="nuevoDocente()">
+		<mat-icon>add</mat-icon>Añadir docente
+	</button>
 </div>
 
 <div class="docentes mat-elevation-z8">
-  <mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="codigo">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
-      <mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
-    </ng-container>
-  
-    <ng-container matColumnDef="nombre">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Materia</mat-header-cell>
-      <mat-cell *matCellDef="let docente" data-label="nombre">
-        {{docente.nombre}}
-      </mat-cell>
-    </ng-container>
+	<mat-table [dataSource]="dataSource" matSort>
+		<ng-container matColumnDef="codigo">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+			<mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
+		</ng-container>
+	
+		<ng-container matColumnDef="nombre">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Materia</mat-header-cell>
+			<mat-cell *matCellDef="let docente" data-label="nombre"> {{docente.nombre}} </mat-cell>
+		</ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="docente" (click)="editarDocente(row)"></mat-row>
-  </mat-table>
-  
-<mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons aria-label="Número de docetes por página"></mat-paginator>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;" class="docente" (click)="editarDocente(row)"></mat-row>
+	</mat-table>
+	
+	<mat-paginator
+			[pageSizeOptions]="[10, 25, 100]"
+			showFirstLastButtons aria-label="Número de docetes por página">
+	</mat-paginator>
 </div>

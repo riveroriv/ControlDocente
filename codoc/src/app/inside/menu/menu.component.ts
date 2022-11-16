@@ -16,7 +16,6 @@ import { PerfilDialogComponent } from '../dialogs/perfil-dialog/perfil-dialog.co
 })
 
 export class MenuComponent implements OnInit{
-  seccion: string = 'Home';
   usuario: string = '';
   isAdmin: boolean = false;
 
@@ -41,10 +40,6 @@ export class MenuComponent implements OnInit{
         error: (e) => this.authService.setTipo('0')
       });
     }
-  }
-
-  setSeccion(sesccion:string){
-    this.seccion=sesccion;
   }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

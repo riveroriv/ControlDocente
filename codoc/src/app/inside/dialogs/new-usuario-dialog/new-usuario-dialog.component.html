@@ -2,43 +2,51 @@
 
 <mat-dialog-content class="mat-typography contenido">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Código</mat-label>
-        <input type="number" matInput #codigo [formControl]="codigoControl">
-        <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
-            Ingrese un código válido
-        </mat-error>
-        <mat-error *ngIf="codigoControl.hasError('required')">
-            El código es <strong>necesario</strong>
-        </mat-error>
-    </mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Código</mat-label>
+		<input type="number" matInput #codigo [formControl]="codigoControl">
+		<mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
+			Ingrese un código válido
+		</mat-error>
+		<mat-error *ngIf="codigoControl.hasError('required')">
+			El código es <strong>necesario</strong>
+		</mat-error>
+	</mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Nombre</mat-label>
-        <input matInput #nombre [formControl]="nombreControl">
-        <mat-error *ngIf="nombreControl.hasError('pattern') && !nombreControl.hasError('required')">
-            Formato de nombre no válido
-        </mat-error>
-        <mat-error *ngIf="nombreControl.hasError('required')">
-            El nombre es <strong>necesario</strong>
-        </mat-error>
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-        <mat-label>Correo electrónico</mat-label>
-        <input matInput type="email" #email  [formControl]="emailControl">
-        <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
-            Email no válido
-        </mat-error>
-        <mat-error *ngIf="emailControl.hasError('required')">
-            El nombre es <strong>necesario</strong>
-        </mat-error>
-    </mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Nombre</mat-label>
+		<input matInput #nombre [formControl]="nombreControl">
+		<mat-error *ngIf="nombreControl.hasError('pattern') && !nombreControl.hasError('required')">
+			Formato de nombre no válido
+		</mat-error>
+		<mat-error *ngIf="nombreControl.hasError('required')">
+			El nombre es <strong>necesario</strong>
+		</mat-error>
+	</mat-form-field>
+	
+	<mat-form-field appearance="fill">
+		<mat-label>Correo electrónico</mat-label>
+		<input matInput type="email" #email  [formControl]="emailControl">
+		<mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+			Email no válido
+		</mat-error>
+		<mat-error *ngIf="emailControl.hasError('required')">
+			El nombre es <strong>necesario</strong>
+		</mat-error>
+	</mat-form-field>
 
 </mat-dialog-content>
 
 <mat-dialog-actions class="botones">
-    <button mat-flat-button (click)="close()">Cancelar</button>
-    <span class="spacer"></span>
-    <button mat-flat-button color="primary" cdkFocusInitia (click)="nuevoUsuario(codigo.value, nombre.value, email.value)">Guardar</button>
+	<button mat-flat-button
+			(click)="close()">
+		Cancelar
+	</button>
+	<span class="spacer"></span>
+	<button mat-flat-button
+			color="primary"
+			cdkFocusInitia
+			(click)="nuevoUsuario(codigo.value, nombre.value, email.value)">
+		Guardar
+	</button>
 </mat-dialog-actions>

@@ -1,66 +1,97 @@
 <div class="vista">
-    <mat-toolbar color="primary" class="mat-elevation-z3">
-      <img src="./assets/CODOC-ICONO.png" class = 'logo'>  
-      <h2 class="codoc">Codoc</h2>
+	<mat-toolbar color="primary" class="mat-elevation-z3">
+		<img src="./assets/CODOC-ICONO.png" class = 'logo'>	
+		<h2 class="codoc">Codoc</h2>
 
-        <span class="spacer"></span>
+			<span class="spacer"></span>
 
-        <div class="menu-desk">
-          <a mat-list-item [routerLink]="['materias']" (click)="setSeccion('Materias')"><button mat-flat-button color="primary"
-            matTooltip="Materias">
-            <mat-icon>school</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['docentes']" (click)="setSeccion('Docentes')"><button mat-flat-button color="primary"
-            matTooltip="Docentes">
-            <mat-icon>people</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['reportes']" (click)="setSeccion('Reportes')"><button mat-flat-button color="primary"
-            matTooltip="Reportes">
-            <mat-icon>bar_chart</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['usuarios']" (click)="setSeccion('Ajustes')" *ngIf="isAdmin"><button mat-flat-button color="primary"
-            matTooltip="Usuarios">
-            <mat-icon>manage_accounts</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['ajustes']" (click)="setSeccion('Ajustes')" *ngIf="isAdmin"><button mat-flat-button color="primary"
-            matTooltip="Ajustes">
-            <mat-icon>settings</mat-icon></button></a>
-            <a mat-list-item [routerLink]="['informacion']"     (click)="setSeccion('Home')"><button mat-flat-button color="primary"
-              matTooltip="Información">
-              <mat-icon>info</mat-icon></button></a>
-        </div>
-        
-        <span class="spacer"></span>
+			<div class="menu-desk">
+				<a mat-list-item [routerLink]="['materias']">
+					<button mat-flat-button color="primary"	matTooltip="Materias">
+						<mat-icon>school</mat-icon>
+					</button>
+				</a>
+				<a mat-list-item [routerLink]="['docentes']">
+					<button mat-flat-button color="primary" matTooltip="Docentes">
+						<mat-icon>people</mat-icon>
+					</button>
+				</a>
+				<a mat-list-item [routerLink]="['reportes']">
+					<button mat-flat-button color="primary" matTooltip="Reportes">
+						<mat-icon>bar_chart</mat-icon>
+					</button>
+				</a>
+				<a mat-list-item [routerLink]="['usuarios']" *ngIf="isAdmin">
+					<button mat-flat-button color="primary" matTooltip="Usuarios">
+						<mat-icon>manage_accounts</mat-icon>
+					</button>
+				</a>
+				<a mat-list-item [routerLink]="['ajustes']" *ngIf="isAdmin">
+					<button mat-flat-button color="primary" matTooltip="Ajustes">
+						<mat-icon>settings</mat-icon>
+					</button>
+				</a>
+					<a mat-list-item [routerLink]="['informacion']">
+						<button mat-flat-button color="primary" matTooltip="Información">
+							<mat-icon>info</mat-icon>
+						</button>
+					</a>
+			</div>
+			
+			<span class="spacer"></span>
 
-        <button mat-icon-button [matMenuTriggerFor]="menuUsuario" aria-label="Menu usuario">
-          <button mat-mini-fab color="basic">{{ usuario }}</button>
-        </button>
-          <mat-menu #menuUsuario="matMenu">
-            <button mat-menu-item (click)="openPerfil()">
-              <mat-icon>person</mat-icon>
-              <span>Perfil</span>
-            </button>
-            <button mat-menu-item (click)="changePassword()">
-              <mat-icon>password</mat-icon>
-              <span>Contraseña</span>
-            </button>
-            <button mat-menu-item (click)="logout()">
-              <mat-icon>logout</mat-icon>
-              <span>Cerrar sesión</span>
-            </button>
-          </mat-menu>
-    </mat-toolbar>
-      <div class="contenedor">
-        <mat-toolbar class="menu-mobile">
-          <a mat-list-item [routerLink]="['materias']" (click)="setSeccion('Materias')"><button mat-icon-button color="primary">
-            <mat-icon>school</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['docentes']" (click)="setSeccion('Docentes')"><button mat-icon-button color="primary">
-            <mat-icon>people</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['reportes']" (click)="setSeccion('Reportes')"><button mat-icon-button color="primary">
-            <mat-icon>bar_chart</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['usuarios']" (click)="setSeccion('Ajustes')" *ngIf="isAdmin"><button mat-icon-button color="primary">
-            <mat-icon>manage_accounts</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['ajustes']" (click)="setSeccion('Ajustes')" *ngIf="isAdmin"><button mat-icon-button color="primary">
-          <mat-icon>settings</mat-icon></button></a>
-          <a mat-list-item [routerLink]="['informacion']"     (click)="setSeccion('Home')"><button mat-icon-button color="primary">
-            <mat-icon>info</mat-icon></button></a>
-        </mat-toolbar>
-        <router-outlet></router-outlet>
-      </div>
+			<button mat-icon-button [matMenuTriggerFor]="menuUsuario" aria-label="Menu usuario">
+				<button mat-mini-fab color="basic">{{ usuario }}</button>
+			</button>
+				<mat-menu #menuUsuario="matMenu">
+					<button mat-menu-item (click)="openPerfil()">
+						<mat-icon>person</mat-icon>
+						<span>Perfil</span>
+					</button>
+					<button mat-menu-item (click)="changePassword()">
+						<mat-icon>password</mat-icon>
+						<span>Contraseña</span>
+					</button>
+					<button mat-menu-item (click)="logout()">
+						<mat-icon>logout</mat-icon>
+						<span>Cerrar sesión</span>
+					</button>
+				</mat-menu>
+	</mat-toolbar>
+
+	<div class="contenedor">
+		<mat-toolbar class="menu-mobile">
+			<a mat-list-item [routerLink]="['materias']">
+				<button mat-icon-button color="primary">
+					<mat-icon>school</mat-icon>
+				</button>
+			</a>
+			<a mat-list-item [routerLink]="['docentes']">
+				<button mat-icon-button color="primary">
+					<mat-icon>people</mat-icon>
+				</button>
+			</a>
+			<a mat-list-item [routerLink]="['reportes']">
+				<button mat-icon-button color="primary">
+					<mat-icon>bar_chart</mat-icon>
+				</button>
+			</a>
+			<a mat-list-item [routerLink]="['usuarios']" *ngIf="isAdmin">
+				<button mat-icon-button color="primary">
+					<mat-icon>manage_accounts</mat-icon>
+				</button>
+			</a>
+			<a mat-list-item [routerLink]="['ajustes']" *ngIf="isAdmin">
+				<button mat-icon-button color="primary">
+					<mat-icon>settings</mat-icon>
+				</button>
+			</a>
+			<a mat-list-item [routerLink]="['informacion']">
+				<button mat-icon-button color="primary">
+					<mat-icon>info</mat-icon>
+				</button>
+			</a>
+		</mat-toolbar>
+		<router-outlet></router-outlet>
+	</div>
 </div>

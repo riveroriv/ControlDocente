@@ -1,24 +1,27 @@
 <app-navexterior></app-navexterior>
 <div class="contenedor">
-  <mat-card class="mat-elevation-z8">
-    <mat-card-title>Consultar materias</mat-card-title>
-    <mat-card-subtitle>Control Docente</mat-card-subtitle>
-    <form (ngSubmit)="consultar(codigo.value)"> 
-    <mat-card-content>
-        <mat-form-field appearance="fill">
-            <mat-label>Código</mat-label>
-            <input matInput [formControl]="codigoControl" #codigo tabindex="1">
-            <mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
-               Ingrese un código válido
-              </mat-error>
-              <mat-error *ngIf="codigoControl.hasError('required')">
-                Su código es <strong>necesaria</strong>
-              </mat-error>
-          </mat-form-field>
-          <mat-card-actions>
-            <button type="submit" mat-flat-button color="primary" tabindex="2">Consultar</button>
-          </mat-card-actions>
-    </mat-card-content>
-    </form>
-</mat-card>
+	<mat-card class="mat-elevation-z8">
+		<mat-card-title>Consultar materias</mat-card-title>
+		<mat-card-subtitle>Control Docente</mat-card-subtitle>
+		<form (ngSubmit)="consultar(codigo.value)"> 
+			<mat-card-content>
+				<mat-form-field appearance="fill">
+					<mat-label>Código</mat-label>
+					<input matInput [formControl]="codigoControl" #codigo tabindex="1">
+
+					<mat-error *ngIf="codigoControl.hasError('pattern') && !codigoControl.hasError('required')">
+						Ingrese un código válido
+					</mat-error>
+					<mat-error *ngIf="codigoControl.hasError('required')">
+						Su código es <strong>necesaria</strong>
+					</mat-error>
+
+				</mat-form-field>
+
+				<mat-card-actions>
+					<button type="submit" mat-flat-button color="primary" tabindex="2">Consultar</button>
+				</mat-card-actions>
+			</mat-card-content>
+		</form>
+	</mat-card>
 </div>
