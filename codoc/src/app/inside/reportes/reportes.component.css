@@ -7,6 +7,9 @@
 .grafico{
     width: 40%;
     margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .docente_report{
     width: 100%;

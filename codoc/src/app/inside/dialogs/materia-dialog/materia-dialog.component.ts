@@ -32,7 +32,11 @@ export class MateriaDialogComponent implements OnInit {
   ciudad: Ciudad = {id:0, nombre: ''};
   codigo: string = '';
   nombre: string = '';
-  ciudades: Ciudad[] = Array({id: 1, nombre: 'Cochabamba'}, {id: 2, nombre: 'La Paz'}, {id: 3, nombre: 'Santa Cruz'});
+  ciudades: Ciudad[] = Array(
+    {id: 1, nombre: 'Cochabamba'},
+    {id: 2, nombre: 'La Paz'},
+    {id: 3, nombre: 'Santa Cruz'}
+    );
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

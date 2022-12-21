@@ -61,7 +61,6 @@ class MateriaController extends Controller
         ->join('ciudades', 'ciudades.id', '=', 'materias.id_ciudad')
         ->select('materias.*','docentes.nombre as docente', 'ciudades.nombre as ciudad')
         ->selectRaw('silabo + parcial_1 + parcial_2 + parcial_3 + nota_1 + nota_2 + nota_3 + planilla as cumplimiento')
-        ->orderBy('cumplimiento', 'ASC')
         ->get();    
     }
     

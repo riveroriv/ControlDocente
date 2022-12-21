@@ -113,7 +113,7 @@ class UsuarioController extends Controller
             'message' => 'Contraseña actualizada'
         ], 200);
     }
-     /**
+    /**
      * 
      * @param Request $request
      * @return Response

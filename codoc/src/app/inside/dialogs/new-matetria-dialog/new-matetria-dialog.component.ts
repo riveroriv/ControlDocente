@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -32,6 +32,10 @@ export class NewMatetriaDialogComponent implements OnInit {
   codigo: string = '';
   nombre: string = '';
 
+  ciudadControl = new FormControl('', [Validators.required]);
+  codigoControl = new FormControl('', [Validators.required, Validators.pattern('[A-ZÑa-zñ0-9]{4,}')]);
+  nombreControl = new FormControl('', [Validators.required, Validators.pattern("^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° 0-9]{3,}$")]);
+  
   ciudades: Ciudad[] = Array(
     {id: 1, nombre: 'Cochabamba'},
     {id: 2, nombre: 'La Paz'},
@@ -88,9 +92,13 @@ export class NewMatetriaDialogComponent implements OnInit {
   codigoAction(codigo: string){
     this.codigo = codigo.toUpperCase();
   }
-  ciudadAction(ciudad: Ciudad){
-    console.warn(ciudad);
+  ciudadAction(ciudadID: number){
+    let ciudad = this.ciudades.find( ciudad => ciudad.id == ciudadID);
+    if (ciudad == null){
+      ciudad = {id: 0, nombre: ''};
+    }
     this.ciudad = ciudad;
+    console.log(this.ciudad);
   }
   crearMateria(){
     this.materiaService.crearMateria({

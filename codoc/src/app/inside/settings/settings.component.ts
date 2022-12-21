@@ -18,6 +18,7 @@ export interface Ciudad {
 export class SettingsComponent implements OnInit {
 
   ciudades: Ciudad[] = Array();
+  selected!: Date | null;
 
   constructor(
     public authService: AuthService,

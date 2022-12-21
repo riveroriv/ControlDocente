@@ -19,3 +19,16 @@
     justify-content: center;
     margin: 20px auto;
 }
+ul li {
+    list-style: none;
+}
+ul{
+    margin: auto;
+    width: max-content;
+}
+.mat-dialog-actions{
+    justify-content: right;
+}
+.invalid{
+    color: rgb(121, 14, 14);
+}

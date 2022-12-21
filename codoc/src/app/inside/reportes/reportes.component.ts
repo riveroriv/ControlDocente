@@ -74,6 +74,8 @@ export class ReportesComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) { }
 
+  docente: boolean = false;
+
   ngOnInit(): void {
     this.cargarReporteDocentes();
     this.cargarReporteMaterias();
@@ -114,6 +116,7 @@ export class ReportesComponent implements OnInit {
         this.dataSource = new MatTableDataSource<DocenteReporte>(docentesReporte.slice());
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        
 
         this.paginator._intl.firstPageLabel = 'Primera';
         this.paginator._intl.itemsPerPageLabel = 'Docentes por página';
@@ -195,5 +198,11 @@ export class ReportesComponent implements OnInit {
       docente.nota_3, 
       docente.planilla];
     this.chart?.update();
+    this.docente = true;
+  }
+  graficoReset(){
+    this.barChartData.datasets[0].data = this.general;
+    this.chart?.update();
+    this.docente = false;
   }
 }

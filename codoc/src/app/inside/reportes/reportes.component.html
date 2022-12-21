@@ -11,10 +11,11 @@
 					[options]="barChartOptions"
 					[type]="barChartType">
 				</canvas>
+				<button mat-button (click)="graficoReset()" *ngIf="docente">Gráfico general<mat-icon>refresh</mat-icon></button>
 			</div>
 		
 			<div class="docentes mat-elevation-z8">
-				<mat-table [dataSource]="dataSource" matSort #docenteSort="matSort">
+				<mat-table [dataSource]="dataSource" matSort #docenteSort="matSort" matSortActive="falta" matSortDirection="desc">
 					<ng-container matColumnDef="codigo">
 						<mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
 						<mat-cell *matCellDef="let docente" data-label="código"> {{docente.codigo}} </mat-cell>
@@ -94,12 +95,12 @@
 				</mat-paginator>
 			</div>
 		</div>
-		
+
 	</mat-tab>
 	<mat-tab label="Materias">
 
 		<div class="materias mat-elevation-z8">
-			<mat-table [dataSource]="dataSourceMaterias" matSort #materiaSort="matSort">
+			<mat-table [dataSource]="dataSourceMaterias" matSort #materiaSort="matSort" matSortActive="cumplimiento" matSortDirection="asc">
 				<ng-container matColumnDef="codigo">
 				<mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
 				<mat-cell *matCellDef="let materia" data-label="código"> {{materia.codigo}} </mat-cell>

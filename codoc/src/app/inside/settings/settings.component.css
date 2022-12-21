@@ -1,8 +1,21 @@
 .ciudades{
-    margin: 20px;
-    padding: 20px;
+    max-width: max-content;
+    display: flex;
+    flex-direction: column;
 }
 .vista{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card{
+    flex-grow: 1;
+    margin: 20px;
+    padding: 20px;
+}
+@media (max-width: 900px) {
+    .card{
+        width: 80%;
+    }
 }
